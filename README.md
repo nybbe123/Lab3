@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Dynamisk webbutveckling - Lab 3
 
 ## Beskrivning av projekt:
