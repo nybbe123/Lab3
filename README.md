@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dynamisk webbutveckling - Lab 3
 
 ## Beskrivning av projekt:
@@ -35,3 +36,23 @@ följt av `npm start`.
 - [] Det ska gå att ha privata konversationer med enskilda användare (DM’s).
 - [] Historik ska sparas för skickade meddelanden och visas när en konversation öppnas (gäller både för Rum och för DM’s).
 - [] När sidan laddas om ska användaren behålla sitt användarnamn, läggas tillbaka i konversationen som den befann sig i (Rum eller DM) och kunna sina läsa tidigare DM’s.
+=======
+
+# Chatt med sockets
+
+<br>
+
+## Intro
+
+I denna lab ska vi skapa en chatt med hjälp av `sockets` och `React.js` samt `TypeScript`.
+
+<br>
+
+## Developers
+
+- _Jontan Nyberg_ (https://github.com/nybbe123)
+- _Max Andersson_ (https://github.com/frontMAX)
+- _Simon Eriksson_ (https://github.com/Vacannot)
+- _Emil Hagelin_ (https://github.com/empafrontend)
+
+>>>>>>> 77ee5c679ec1419ddf406e80369ba81b2cea8614
