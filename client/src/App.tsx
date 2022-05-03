@@ -43,7 +43,7 @@ function App() {
                 type="text"
                 name="nickname"
                 id="nickname"
-                placeholder='Enter your nickname'
+                placeholder='Enter a nickname...'
                 // label="Nickname"
                 onChange={(event) => {
                   setUsername(event.target.value)
@@ -56,7 +56,7 @@ function App() {
                 type="text"
                 name="room"
                 id="room"
-                placeholder='Chatroom'
+                placeholder='Enter a Room name...'
                 // label="Enter chatroom"
                 onChange={(event) => {
                   setUsername(event.target.value)

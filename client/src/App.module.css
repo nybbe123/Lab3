@@ -61,6 +61,7 @@
 }
 
 .right-container h3 {
+    text-align: center;
     color: #fafafa;
     font-weight: 400;
 }
@@ -73,7 +74,7 @@
     line-height: 1.5;
 }
 
- @media (max-height: 1080px) {
+ @media (max-height: 1000px) {
     .logotype {
         position: absolute;
         top: 0;
@@ -84,6 +85,15 @@
  }
 
  @media (max-width: 1000px) {
+    .left-container {
+        width: 50%;
+    }
+    .right-container {
+        width: 50%;
+    }
+ }
+
+ @media (max-width: 780px) {
     .left-container {
         width: 100%;
     }
