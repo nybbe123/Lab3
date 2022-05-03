@@ -1,10 +1,10 @@
 export interface ServerToClientEvents {
-    "chat message": (message: string) => void;
+    message: (message: string) => void;
     welcome: (message: string) => void;
 }
 
 export interface ClientToServerEvents {
-    "chat message": (message: string) => void;
+    message: (message: string) => void;
 }
 
 export interface InterServerEvents {
@@ -13,5 +13,4 @@ export interface InterServerEvents {
 
 export interface ServerSocketData {
     name: string;
-    age: number;
 }
