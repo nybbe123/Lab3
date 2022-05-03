@@ -30,18 +30,21 @@ function App() {
 
   return (
     <div>
-      <h1>Hello world</h1>
+      <h1>Chathouse</h1>
       <h4>Enter Name:</h4>
       <input 
         type="text" 
-        placeholder='John Wick...' 
+        placeholder='Enter your nickname'
+        label="Nickname" 
         onChange={(event) => {
           setUsername(event.target.value)
         }} 
       />
+      <h4>Enter chatroom</h4>
       <input 
         type="text" 
-        placeholder='Mancave 2.0...' 
+        placeholder='Chatroom'
+        label="Enter chatroom" 
         onChange={(event) => {
           setUsername(event.target.value)
         }} 
