@@ -1,0 +1,67 @@
+.main-container {
+    display: flex;
+}
+
+.left-container {
+    width: 40%;
+    height: 100vh;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5rem;
+}
+
+.logotype {
+    margin-top: 5rem;
+    height: 150px;
+    width: auto;
+}
+
+.login-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1.5rem;
+}
+
+.username-container {
+    width: 100%;
+}
+
+.left-container h3 {
+    margin-bottom: 1rem;
+}
+
+.left-container button {
+    margin-top: 2rem;
+}
+
+.right-container {
+    width: 60%;
+    height: 100vh;
+    background-image: url('./assets/images/background.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.right-container h3 {
+    color: #fafafa;
+    font-weight: 400;
+}
+
+.right-container p {
+    color: #e6e6e6;
+    max-width: 44rem;
+    text-align: center;
+    font-weight: 300;
+    line-height: 1.5;
+}
