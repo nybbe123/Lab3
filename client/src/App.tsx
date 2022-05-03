@@ -13,42 +13,42 @@ const initalMessagesState = {
 function App() {
   const [username, setUsername] = useState("");
   const [connected, setConnected] = useState(false);
-  const [currentChat, setCurrentChat] = useState({ isChannel: true, chatId: "general", recieverId: ""});
+  const [currentChat, setCurrentChat] = useState({ isChannel: true, chatId: "general", recieverId: "" });
   const [connectedRooms, setConnectedRooms] = useState(["general"]);
   const [allUsers, setAllUsers] = useState([]);
   const [messages, setMessages] = useState(initalMessagesState);
   const [message, setMessage] = useState("");
 
   let body;
-  if(connected) {
+  if (connected) {
     body = {
-      <Chat
-      message={message}
-      handleMe
-    }
+      < Chat
+    message = { message }
+    handleMe
   }
+}
 
-  return (
-    <div>
-      <h1>Hello world</h1>
-      <h4>Enter Name:</h4>
-      <input 
-        type="text" 
-        placeholder='John Wick...' 
-        onChange={(event) => {
-          setUsername(event.target.value)
-        }} 
-      />
-      <input 
-        type="text" 
-        placeholder='Mancave 2.0...' 
-        onChange={(event) => {
-          setUsername(event.target.value)
-        }} 
-      />
-      <button>JOIN</button>
-    </div>
-  );
+return (
+  <div>
+    <h1>Hello world</h1>
+    <h4>Enter Name:</h4>
+    <input
+      type="text"
+      placeholder='John Wick...'
+      onChange={(event) => {
+        setUsername(event.target.value)
+      }}
+    />
+    <input
+      type="text"
+      placeholder='Mancave 2.0...'
+      onChange={(event) => {
+        setUsername(event.target.value)
+      }}
+    />
+    <button>JOIN</button>
+  </div>
+);
 }
 
 export default App;
