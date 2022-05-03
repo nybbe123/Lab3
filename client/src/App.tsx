@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import io from "socket.io-client";
 import immer from "immer";
+import classes from './App.module.css';
+import background from './assets/images/background.png';
+import logo from './assets/images/chathouse.png';
 
 const socket = io('http://localhost:6001');
 
@@ -29,27 +32,44 @@ function App() {
   // }
 
   return (
-    <div>
-      <h1>Chathouse</h1>
-      <h4>Enter Name:</h4>
-      <input
-        type="text"
-        placeholder='Enter your nickname'
-        // label="Nickname"
-        onChange={(event) => {
-          setUsername(event.target.value)
-        }}
-      />
-      <h4>Enter chatroom</h4>
-      <input
-        type="text"
-        placeholder='Chatroom'
-        // label="Enter chatroom"
-        onChange={(event) => {
-          setUsername(event.target.value)
-        }}
-      />
-      <button>JOIN</button>
+    <div className={classes['main-container']}>
+      <div className={classes['left-container']}>
+          <img src={logo} alt="logotype" className={classes.logotype} />
+          <div className={classes['login-container']}>
+            <h3>Create New Chat</h3>
+            <div className={classes['username-container']}>
+              <label htmlFor="nickname">Nickname</label>
+              <input
+                type="text"
+                name="nickname"
+                id="nickname"
+                placeholder='Enter your nickname'
+                // label="Nickname"
+                onChange={(event) => {
+                  setUsername(event.target.value)
+                }}
+              />
+            </div>
+            <div className={classes['room-container']}>
+              <label htmlFor="room">Room Name</label>
+              <input
+                type="text"
+                name="room"
+                id="room"
+                placeholder='Chatroom'
+                // label="Enter chatroom"
+                onChange={(event) => {
+                  setUsername(event.target.value)
+                }}
+              />
+            </div>
+            <button>CONTINUE</button>
+          </div>
+      </div>
+      <div className={classes['right-container']}>
+          <h3>Free Online Chat Application</h3>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem molestias nulla doloremque, quo rerum assumenda veritatis quam quasi. Vel maiores ex dolorum dolor unde corporis quos temporibus aspernatur.</p>
+      </div>
     </div>
   );
 }
