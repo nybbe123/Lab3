@@ -3,27 +3,33 @@
 }
 
 .left-container {
+    position: relative;
     width: 40%;
     height: 100vh;
     background-color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    gap: 5rem;
+    justify-content: center;
 }
 
 .logotype {
+    position: absolute;
+    top: 0;
     margin-top: 5rem;
     height: 150px;
     width: auto;
 }
 
 .login-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     width: 80%;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 1.5rem;
 }
 
@@ -51,6 +57,7 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    padding: 2rem;
 }
 
 .right-container h3 {

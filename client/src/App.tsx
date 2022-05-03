@@ -34,37 +34,37 @@ function App() {
   return (
     <div className={classes['main-container']}>
       <div className={classes['left-container']}>
-        <img src={logo} alt="logotype" className={classes.logotype} />
-        <div className={classes['login-container']}>
-          <h3>Create New Chat</h3>
-          <div className={classes['username-container']}>
-            <label htmlFor="nickname">Nickname</label>
-            <input
-              type="text"
-              name="nickname"
-              id="nickname"
-              placeholder='Enter your nickname'
-              // label="Nickname"
-              onChange={(event) => {
-                setUsername(event.target.value)
-              }}
-            />
+          <img src={logo} alt="logotype" className={classes.logotype} />
+          <div className={classes['login-container']}>
+            <h3>Create New Chat</h3>
+            <div className={classes['username-container']}>
+              <label htmlFor="nickname">Nickname</label>
+              <input
+                type="text"
+                name="nickname"
+                id="nickname"
+                placeholder='Enter your nickname'
+                // label="Nickname"
+                onChange={(event) => {
+                  setUsername(event.target.value)
+                }}
+              />
+            </div>
+            <div className={classes['room-container']}>
+              <label htmlFor="room">Room Name</label>
+              <input
+                type="text"
+                name="room"
+                id="room"
+                placeholder='Chatroom'
+                // label="Enter chatroom"
+                onChange={(event) => {
+                  setUsername(event.target.value)
+                }}
+              />
+            </div>
+            <button>CONTINUE</button>
           </div>
-          <div className={classes['room-container']}>
-            <label htmlFor="room">Room Name</label>
-            <input
-              type="text"
-              name="room"
-              id="room"
-              placeholder='Chatroom'
-              // label="Enter chatroom"
-              onChange={(event) => {
-                setUsername(event.target.value)
-              }}
-            />
-          </div>
-          <button>CONTINUE</button>
-        </div>
       </div>
       <div className={classes['right-container']}>
           <h3>Free Online Chat Application</h3>
