@@ -59,14 +59,6 @@ io.on('connection', (socket) => {
                 sender
             };
             socket.to(to).emit("new message", payload)
-        } else {
-            const payload = {
-                content,
-                chatId: sender,
-                sender
-            }
-            socket.to(to).emit("new message", payload)
-        }
 
         // Checks that the chatId exists to avoid pushing messages to a chat that doesnt exist
         if (messages[chatId]) {

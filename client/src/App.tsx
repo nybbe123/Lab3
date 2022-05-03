@@ -18,7 +18,6 @@ function App() {
   const [allUsers, setAllUsers] = useState([]);
   const [messages, setMessages] = useState(initalMessagesState);
   const [message, setMessage] = useState("");
-  const socketReference = useRef();
 
   let body;
   if(connected) {
