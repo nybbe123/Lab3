@@ -1,13 +1,32 @@
-import React, { useState } from 'react';
-import io from 'socket.io-client';
+import React, { useState } from "react";
+import io from "socket.io-client";
+import immer from "immer";
 
-const socket = io('http://localhost:3001');
+const socket = io('http://localhost:6001');
+
+const initalMessagesState = {
+  general: [],
+  channel2: [],
+  athirdchannel: []
+}
 
 function App() {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
+  const [connected, setConnected] = useState(false);
+  const [currentChat, setCurrentChat] = useState({ isChannel: true, chatId: "general", recieverId: ""});
+  const [connectedRooms, setConnectedRooms] = useState(["general"]);
+  const [allUsers, setAllUsers] = useState([]);
+  const [messages, setMessages] = useState(initalMessagesState);
+  const [message, setMessage] = useState("");
+  const socketReference = useRef();
 
-  const joinRoom = () => {
-
+  let body;
+  if(connected) {
+    body = {
+      <Chat
+      message={message}
+      handleMe
+    }
   }
 
   return (
