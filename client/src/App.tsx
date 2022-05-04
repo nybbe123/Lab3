@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import io from "socket.io-client";
-import immer from "immer";
+
+import { io, Socket } from "socket.io-client";
+import { ServerToClientEvents, ClientToServerEvents } from "../../server/types";
+
 import classes from "./App.module.css";
 import background from "./assets/images/background.png";
 import logo from "./assets/images/chathouse.png";
 
-const socket = io("http://localhost:6001");
+const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://localhost:3001", {"autoConnect": false});
+
+let username: string;
+let room: string;
 
 const initalMessagesState = {
   general: [],
@@ -26,14 +31,23 @@ function App() {
   const [messages, setMessages] = useState(initalMessagesState);
   const [message, setMessage] = useState("");
 
-  let body;
-  // if(connected) {
-  //   body = {
-  //     <Chat
-  //     message={message}
-  //     handleMe
-  //   }
-  // }
+  function onHandleClick(e: any) {
+    socket.auth = {
+      username: username,
+    }
+    socket.connect();
+  }
+
+  socket.on("connect_error", (err) => {
+    if(err.message = "Invalid username") {
+      console.log("Du angav ett ogilgitgt användarnamn, försök igen");
+    }
+  });
+
+  socket.on("connected", (username) => {
+    console.log(username);
+    username = username;
+  })
 
   return (
     <div className={classes['main-container']}>
@@ -42,13 +56,12 @@ function App() {
         <div className={classes['login-container']}>
           <h3>Create New Chat</h3>
           <div className={classes['username-container']}>
-            <label htmlFor="nickname">Nickname</label>
+            <label htmlFor="username">Nickname</label>
             <input
               type="text"
-              name="nickname"
-              id="nickname"
-              placeholder='Enter your nickname'
-              // label="Nickname"
+              name="username"
+              id="username"
+              placeholder='Enter your username'
               onChange={(event) => {
                 setUsername(event.target.value)
               }}
@@ -61,14 +74,12 @@ function App() {
               name="room"
               id="room"
               placeholder='Chatroom'
-              // label="Enter chatroom"
               onChange={(event) => {
                 setUsername(event.target.value)
               }}
             />
           </div>
-          <button> <a href="./chatRoom"> CONTINUE </a>  </button>
-          <button>Existed rooms</button>
+          <button onClick={onHandleClick}>CONTINUE</button>
         </div>
       </div>
       <div className={classes['right-container']}>

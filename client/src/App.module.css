@@ -45,6 +45,10 @@
     margin-top: 2rem;
 }
 
+.left-container button:hover {
+    cursor: pointer;
+}
+
 .right-container {
     width: 60%;
     height: 100vh;
