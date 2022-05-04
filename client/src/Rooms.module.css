@@ -56,6 +56,7 @@
 .right-container h3 {
     color: #fafafa;
     font-weight: 400;
+    text-align: center;
 }
 
 .right-container p {
@@ -66,13 +67,10 @@
     line-height: 1.5;
 }
 
- @media (max-height: 1080px) {
-    .logotype {
-        position: absolute;
-        top: 0;
+
+@media (max-height: 1080px) {
+    .logo-container {
         margin-top: 3rem;
-        height: 100px;
-        width: auto;
     }
  }
 
