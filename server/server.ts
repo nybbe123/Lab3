@@ -16,16 +16,17 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEve
     },
 });
 
+// När en användare kopplar upp sig kör detta först som kontrollerar användarnamn & rumsnamn
 io.use((socket: Socket, next) => {
     const username: string = socket.handshake.auth.username;
     if(!username || username.length < 2) {
-        return next(new Error("Invalid username"));
+        return next(new Error("Invalid username or roomname"));
     }
     socket.data.username = username;
     next();
 })
 
-// När en användare kopplar upp sig kör detta
+// Om allt är ok så körs denna
 io.on("connection", (socket) => {
     console.log("a user connected");
     if(socket.data.username) {
