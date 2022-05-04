@@ -47,4 +47,11 @@ button {
   border-radius: 6px;
   background-color: #9E26FD;
   color: #fafafa;
+  
 }
+
+.continue-btn:hover {
+  opacity: 0.6;
+  
+}
+
