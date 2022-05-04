@@ -65,7 +65,7 @@ function LoginPage() {
                 type="text"
                 name="username"
                 id="username"
-                placeholder='Enter your username'
+                placeholder='Enter Username'
                 onChange={(event) => {
                 setUsername(event.target.value)
                 }}
@@ -77,7 +77,7 @@ function LoginPage() {
                 type="text"
                 name="roomname"
                 id="roomname"
-                placeholder='Chatroom'
+                placeholder='Enter Chatroom Name'
                 onChange={(event) => {
                 setRoomname(event.target.value)
                 }}
