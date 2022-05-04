@@ -3,6 +3,7 @@ import http from "http"; //Req to build server with socket.io
 import cors from "cors"; //Req for secure cross-origin requests and data transfers between browsers and servers.
 import { Server, Socket } from "socket.io";
 import { ClientToServerEvents, ServerToClientEvents, InterServerEvents, ServerSocketData } from "./types";
+import { getRooms } from "./roomStore";
 
 const app = express();
 app.use(cors());
@@ -32,8 +33,21 @@ io.on("connection", (socket) => {
     if(socket.data.username) {
         socket.emit("connected", socket.data.username)
     }
+
+    socket.on('join', (roomName) => {
+        const shouldBroadcastRooms: boolean = !getRooms(io).includes(roomName);
+        socket.join(roomName);
+
+        if(shouldBroadcastRooms) {
+            socket.broadcast.emit("roomList", getRooms(io));
+        }
+
+        socket.emit("joined", roomName);
+    })
 });
 
+
+// Serverlyssnare
 server.listen(port, () => {
     console.log(`Server is working on port https://localhost:${port}`)
 });

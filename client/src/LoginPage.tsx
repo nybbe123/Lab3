@@ -11,33 +11,18 @@ import logo from "./assets/images/chathouse.png";
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://localhost:3001", {"autoConnect": false});
 
 let username: string;
-let roomname: string;
-
-const initalMessagesState = {
-  general: [],
-  channel2: [],
-  athirdchannel: [],
-};
+let joinedRoom: string;
 
 function LoginPage() {
   const navigate = useNavigate(); 
   const [username, setUsername] = useState("");
-  const [roomname, setRoomname] = useState("");
-  const [connected, setConnected] = useState(false);
-  const [currentChat, setCurrentChat] = useState({
-    isChannel: true,
-    chatId: "general",
-    recieverId: "",
-  });
-  const [connectedRooms, setConnectedRooms] = useState(["general"]);
-  const [allUsers, setAllUsers] = useState([]);
-  const [messages, setMessages] = useState(initalMessagesState);
-  const [message, setMessage] = useState("");
+  const [roomName, setRoomName] = useState("");
 
   function onHandleClick() {
     socket.auth = {
       username: username,
     }
+    socket.emit('join', roomName);
     socket.connect();
   }
 
@@ -47,11 +32,21 @@ function LoginPage() {
     }
   });
 
+  socket.on("roomList", (rooms) => {
+    console.log(rooms);
+  })
+
+  socket.on('joined', (roomName) => {
+      console.log(`joined room: ${roomName}`)
+    joinedRoom = roomName;
+  })
+
   socket.on("connected", (username) => {
-    console.log(username, roomname);
+    console.log(`Connected User: ${username}`)
     username = username;
     navigate('/rooms');
   })
+
 
   return (
     <div className={classes['main-container']}>
@@ -79,7 +74,7 @@ function LoginPage() {
                 id="roomname"
                 placeholder='Enter Chatroom Name'
                 onChange={(event) => {
-                setRoomname(event.target.value)
+                setRoomName(event.target.value)
                 }}
             />
             </div>
