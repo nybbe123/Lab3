@@ -2,7 +2,7 @@ import express from "express";
 import http from "http"; //Req to build server with socket.io
 import cors from "cors"; //Req for secure cross-origin requests and data transfers between browsers and servers.
 import { Server, Socket } from "socket.io";
-import { ClientToServerEvents, ServerToClientEvents, InterServerEvents, ServerSocketData } from "./types";
+import { ClientToServerEvents, ServerToClientEvents, InterServerEvents, ServerSocketData } from "../types";
 import { getRooms } from "./roomStore";
 
 const app = express();

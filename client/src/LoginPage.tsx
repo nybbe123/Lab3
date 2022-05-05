@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import { io, Socket } from "socket.io-client";
-import { ServerToClientEvents, ClientToServerEvents } from "../../server/types";
+import { ServerToClientEvents, ClientToServerEvents } from "../../types";
 
 import classes from "./LoginPage.module.css";
 import background from "./assets/images/background.png";
