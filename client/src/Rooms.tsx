@@ -8,7 +8,7 @@ function rooms() {
                 <div className={classes['logo-container']}>
                     <img src={logoMini} alt="logotype" className={classes.logotype} />
                     <div className={classes['logo-text-container']}>
-                        <h3> {setUsername} </h3>
+                        <h3> </h3>
                         <p>is in da ChatHouse...</p>
                     </div>
                 </div>
