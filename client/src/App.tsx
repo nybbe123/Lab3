@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "./LoginPage";
-import ChatRoom from "./ChatRoom";
+import ChatRoom from "./chatRoom";
 import Rooms from "./Rooms";
 
 import classes from "./App.module.css";

@@ -83,7 +83,7 @@ function LoginPage() {
         </div>
         <div className={classes['right-container']}>
         <h3>Free Online Chat Application</h3>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem molestias nulla doloremque, quo rerum assumenda veritatis quam quasi. Vel maiores ex dolorum dolor unde corporis quos temporibus aspernatur.</p>
+        <p>Welcome to chatroom, your new favorite chat app, it is completly free and showcases multiple different features such as, direct messaging, creating your own rooms setting a username and much more!</p>
         </div>
     </div>
   );
