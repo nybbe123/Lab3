@@ -38,6 +38,11 @@ input {
   font-size: 1rem;
 }
 
+input:focus {
+  box-sizing: border-box;
+  outline: 2px solid #6a1baa8f;
+}
+
 button {
   font-family: 'Montserrat', sans-serif;
   height: 4rem;
@@ -47,11 +52,11 @@ button {
   border-radius: 6px;
   background-color: #9E26FD;
   color: #fafafa;
+  transition: 150ms;
   
 }
 
-.continue-btn:hover {
-  opacity: 0.6;
-  
+button:hover {
+  background-color: #841fd6;
 }
 
