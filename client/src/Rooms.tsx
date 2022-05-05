@@ -1,5 +1,5 @@
 import classes from "./Rooms.module.css";
-import logoMini from './assets/images/logoMini.png';
+import logoMini from './assets/images/logoMini.png'
 
 function rooms() {
     return (
@@ -8,7 +8,7 @@ function rooms() {
                 <div className={classes['logo-container']}>
                     <img src={logoMini} alt="logotype" className={classes.logotype} />
                     <div className={classes['logo-text-container']}>
-                        <h3>JOHN WICK</h3>
+                        <h3> {setUsername} </h3>
                         <p>is in da ChatHouse...</p>
                     </div>
                 </div>
