@@ -49,11 +49,11 @@ io.on("connection", (socket) => {
 });
 
  // Removes the user that's leaving from the existing users Array and emits that new Array to all existing sockets.
-io.on("disconnect", (socket) => {
+/* io.on("disconnect", (socket) => {
     console.log('User disconnected', socket.id);
     users = users.filter(u => u.id !== socket.id);
-/*     io.emit("new user", users); */
-})
+    io.emit("new user", users);
+}) */
 
 
 // Serverlyssnare
