@@ -8,11 +8,9 @@ import classes from "./LoginPage.module.css";
 import background from "./assets/images/background.png";
 import logo from "./assets/images/chathouse.png";
 import SocketContext from "./store/SocketContext";
+import { join } from "path";
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://localhost:3001", {"autoConnect": false});
-
-let username: string;
-let joinedRoom: string;
 
 function LoginPage() {
  const SocketCtx = useContext(SocketContext);
@@ -25,8 +23,12 @@ function LoginPage() {
     socket.auth = {
       username: username,
     }
+    if(!roomName.length) {
+        console.log('Ogiltigt namn på rummet...')
+        return;
+    }
     socket.emit('join', roomName);
-    socket.connect();
+    socket.connect(); 
   }
 
   useEffect(() => {
@@ -34,25 +36,23 @@ function LoginPage() {
         if(err.message = "Invalid username") {
           console.log("Invalid username, please try again.");
         }
-      });
-    
-      socket.on("roomList", (rooms) => {
-        console.log(rooms);
-      })
-    
-      socket.on('joined', (roomName) => {
-          console.log(`joined room: ${roomName}`)
-        joinedRoom = roomName;
-      })
-    
-      socket.on("connected", (username) => {
-        console.log(`Connected User: ${username}`)
-        username = username;
-        SocketCtx!.username = username;
-        SocketCtx!.roomName = roomName;
-        navigate('/rooms');
-      })
-  }, [])
+    })
+    }, [])
+
+    useEffect(() => {
+        socket.on('joined', (roomName) => {
+            console.log(`Users RoomName: ${roomName}`)
+        })
+    }, [])
+
+    useEffect(() => {
+        socket.on("connected", (username) => {
+            console.log(`Connected User: ${username}`)
+            SocketCtx!.roomName = roomName;
+            SocketCtx!.username = username;
+            navigate('/rooms');
+        })
+    }, [])
 
 
   return (

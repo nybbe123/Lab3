@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
 import { ClientToServerEvents, ServerToClientEvents } from "../../../server/types";
 
@@ -17,11 +18,18 @@ interface Props {
 
 // Skapar en provider för kontexten
 const SocketProvider: React.FC<Props> = ({children}) => {
+    const [socket, setSocket] = useState<Socket<ServerToClientEvents, ClientToServerEvents>>();
+    const [username, setUsername] = useState('');
+    const [roomName, setRoomName] = useState('');
+    const [rooms, setRooms] = useState<String[]>([]);
 
-    const [username, setUsername] = useState("");
-    const [roomName, setRoomName] = useState("");
-    // state
-    // rummen, nickname, valt rum, aktuela chatten
+    // Listar alla rum
+    useEffect(() => {
+        socket?.on("roomList", (AvailableRooms) => {
+            console.log(rooms);
+            setRooms(AvailableRooms);
+        })
+    });
 
     return (
         <SocketContext.Provider value={{
