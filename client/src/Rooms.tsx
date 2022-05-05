@@ -1,14 +1,17 @@
 import classes from "./Rooms.module.css";
-import logoMini from './assets/images/logoMini.png';
+import logoMini from './assets/images/logoMini.png'
+import { useContext } from "react";
+import SocketContext from "./store/SocketContext";
 
-function rooms() {
+function Rooms() {
+    const SocketCtx = useContext(SocketContext);
     return (
         <div className={classes['main-container']}>
             <div className={classes['left-container']}>
                 <div className={classes['logo-container']}>
                     <img src={logoMini} alt="logotype" className={classes.logotype} />
                     <div className={classes['logo-text-container']}>
-                        <h3>JOHN WICK</h3>
+                        <h3>{SocketCtx?.username}</h3>
                         <p>is in da ChatHouse...</p>
                     </div>
                 </div>
@@ -24,4 +27,4 @@ function rooms() {
     );
 }
 
-export default rooms;
+export default Rooms;
