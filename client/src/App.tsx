@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import LoginPage from "./LoginPage";
 import ChatRoom from "./ChatRoom";
 import Rooms from "./Rooms";
-import SocketContext from "./store/SocketContext"
+import SocketContext from "./store/SocketContext";
 
 import classes from "./App.module.css";
 import SocketProvider from "./store/SocketProvider";
