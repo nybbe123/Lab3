@@ -6,14 +6,17 @@ import Rooms from "./Rooms";
 import SocketContext from "./store/SocketContext"
 
 import classes from "./App.module.css";
+import SocketProvider from "./store/SocketProvider";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="/rooms" element={<Rooms />} />
-      <Route path="/chatRoom" element={<ChatRoom />} />
-    </Routes>
+    <SocketProvider>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/rooms" element={<Rooms />} />
+        <Route path="/chatRoom" element={<ChatRoom />} />
+      </Routes>
+    </SocketProvider>
   );
 }
 

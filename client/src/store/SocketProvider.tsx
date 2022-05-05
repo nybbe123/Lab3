@@ -18,9 +18,10 @@ interface Props {
 // Skapar en provider för kontexten
 const SocketProvider: React.FC<Props> = ({children}) => {
 
+    const [username, setUsername] = useState("");
+    const [roomName, setRoomName] = useState("");
     // state
     // rummen, nickname, valt rum, aktuela chatten
-
 
     return (
         <SocketContext.Provider value={{
@@ -37,24 +38,4 @@ const SocketProvider: React.FC<Props> = ({children}) => {
     )
 }
 
-// useEffect(() => {
-    
-//     return (
-//        <socketContext.Provider 
-//        value = {{
-//            socket,
-//            rooms,
-//            updateShorthandPropertyAssignment,
-//            roomName,
-//        }}
-//        >
-//          { children }
-//           </socketContext.Provider>
-//         );
-//     };
-    
-     
-
-
-
-export default SocketContext;
+export default SocketProvider;
