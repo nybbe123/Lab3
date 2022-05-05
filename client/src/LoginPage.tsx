@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
 
 import { io, Socket } from "socket.io-client";
-import { ServerToClientEvents, ClientToServerEvents } from "../../server/types";
+import { ServerToClientEvents, ClientToServerEvents } from "../../types";
 
 import classes from "./LoginPage.module.css";
 import background from "./assets/images/background.png";
@@ -27,6 +27,7 @@ function LoginPage() {
     }
     socket.emit('join', roomName);
     socket.connect();
+    
   }
 
   useEffect(() => {
@@ -86,7 +87,9 @@ function LoginPage() {
                 }}
             />
             </div>
-            <button onClick={onHandleClick}>CONTINUE</button>
+            <Link to="/rooms">
+              <button onClick={onHandleClick}>CONTINUE</button>
+            </Link>
         </div>
         </div>
         <div className={classes['right-container']}>

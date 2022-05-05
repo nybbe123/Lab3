@@ -2,7 +2,7 @@ import express from "express";
 import http from "http"; //Req to build server with socket.io
 import cors from "cors"; //Req for secure cross-origin requests and data transfers between browsers and servers.
 import { Server, Socket } from "socket.io";
-import { ClientToServerEvents, ServerToClientEvents, InterServerEvents, ServerSocketData } from "./types";
+import { ClientToServerEvents, ServerToClientEvents, InterServerEvents, ServerSocketData } from "../types";
 import { getRooms } from "./roomStore";
 
 const app = express();
@@ -46,14 +46,16 @@ io.on("connection", (socket) => {
 
         socket.emit("joined", roomName);
     })
+
+     // Removes the user that's leaving from the existing users Array and emits that new Array to all existing sockets.
+    socket.on("disconnect", (socket) => {
+        console.log('User disconnected', socket.id);
+        users = users.filter(u => u.id !== socket.id);
+    io.emit("userlist", users);
+})
+
 });
 
- // Removes the user that's leaving from the existing users Array and emits that new Array to all existing sockets.
-/* io.on("disconnect", (socket) => {
-    console.log('User disconnected', socket.id);
-    users = users.filter(u => u.id !== socket.id);
-    io.emit("new user", users);
-}) */
 
 
 // Serverlyssnare
