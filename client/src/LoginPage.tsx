@@ -26,26 +26,28 @@ function LoginPage() {
     socket.connect();
   }
 
-  socket.on("connect_error", (err) => {
-    if(err.message = "Invalid username") {
-      console.log("Du angav ett ogilgitgt användarnamn, försök igen");
-    }
-  });
-
-  socket.on("roomList", (rooms) => {
-    console.log(rooms);
-  })
-
-  socket.on('joined', (roomName) => {
-      console.log(`joined room: ${roomName}`)
-    joinedRoom = roomName;
-  })
-
-  socket.on("connected", (username) => {
-    console.log(`Connected User: ${username}`)
-    username = username;
-    navigate('/rooms');
-  })
+  useEffect(() => {
+    socket.on("connect_error", (err) => {
+        if(err.message = "Invalid username") {
+          console.log("Invalid username, please try again.");
+        }
+      });
+    
+      socket.on("roomList", (rooms) => {
+        console.log(rooms);
+      })
+    
+      socket.on('joined', (roomName) => {
+          console.log(`joined room: ${roomName}`)
+        joinedRoom = roomName;
+      })
+    
+      socket.on("connected", (username) => {
+        console.log(`Connected User: ${username}`)
+        username = username;
+        navigate('/rooms');
+      })
+  }, [])
 
 
   return (
@@ -61,6 +63,7 @@ function LoginPage() {
                 name="username"
                 id="username"
                 placeholder='Enter Username'
+                autoComplete="off"
                 onChange={(event) => {
                 setUsername(event.target.value)
                 }}
