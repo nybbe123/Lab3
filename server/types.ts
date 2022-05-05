@@ -26,7 +26,7 @@ export interface ServerToClientEvents {
   // This is where we save the information that will be important over a duration of time.
   // Information on what a data property looks like on a server.
   export interface ServerSocketData {
-    nickname: string;
+    username: string;
     chatlog: (chatlog: string[]) => void;
   }
   

@@ -1,6 +1,8 @@
+import classes from "./chatRoom.module.css";
+
 function chatRoom() {
     return (
-        <h1>Hello</h1>
+        <h1>Helllo</h1>
 
     );
 }
