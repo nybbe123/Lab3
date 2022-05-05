@@ -36,15 +36,19 @@ io.on("connection", (socket) => {
         socket.emit("connected", socket.data.username)
     }
 
-    socket.on("join", (roomName) => {
-        const shouldBroadcastRooms: boolean = !getRooms(io).includes(roomName);
-        socket.join(roomName);
+    socket.on("join", (room) => {
+        const shouldBroadcastRooms: boolean = !getRooms(io).includes(room);
+        socket.join(room);
 
         if(shouldBroadcastRooms) {
             socket.broadcast.emit("roomList", getRooms(io));
         }
 
-        socket.emit("joined", roomName);
+        socket.emit("joined", room);
+    })
+
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
     })
 });
 
