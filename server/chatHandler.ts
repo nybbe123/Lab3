@@ -1,7 +1,6 @@
 import { Server, Socket } from "socket.io";
 import { getRooms } from "./roomStore";
 
-
 export default (io: Server, socket: Socket) => {
 
     socket.on("join", (room) => {
@@ -20,6 +19,8 @@ export default (io: Server, socket: Socket) => {
 
     socket.on("message", (message, to) => {
         console.log(message, to)
+
+
 
         if (!socket.data.nickname) {
             return socket.emit("_error", "Missing nickname on socket..")

@@ -11,6 +11,9 @@ const server = http.createServer(app);
 var port = process.env.PORT || 3001;
 
 let users = [];
+let messages = [];
+
+
 
 const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, ServerSocketData>(server, {
     cors: {
@@ -25,6 +28,14 @@ io.use((socket: Socket, next) => {
     if(!username || username.length < 2) {
         return next(new Error("Invalid username or roomname"));
     }
+
+    const user = {
+        username,
+        id: socket.id
+    }
+    users.push(user)
+    io.emit("userlist", users)
+
     socket.data.username = username;
     next();
 })
@@ -49,6 +60,10 @@ io.on("connection", (socket) => {
 
     socket.on('disconnect', () => {
         console.log('user disconnected');
+    })
+
+    socket.on("message", (message, to) => {
+        
     })
 });
 

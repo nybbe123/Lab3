@@ -1,6 +1,8 @@
-import { Server } from "socket.io";
+import { Server, Socket } from "socket.io";
 
 // Här kan ni spara chat- & rumhistorik  
+
+const history = [];
 
 export function getRooms(io: Server) {
     const rooms = []
@@ -10,4 +12,17 @@ export function getRooms(io: Server) {
         }
     }
     return rooms;
+}
+
+export function getHistory(io: Server, socket: Socket, rooms: [], users: [user]){
+    socket.on("join", (room) => {
+
+        const newconnectionId = users.user.socket.id;
+
+        if(//Currently connected users == newconnectionId){
+            // Send history
+        }else{
+            // dont send history lol
+        }
+    })
 }
