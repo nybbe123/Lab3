@@ -38,6 +38,18 @@
     justify-content: center;
 }
 
+.rooms-divs {
+    margin-top: 3rem;
+    width: 50vh;
+}
+
+
+.room-button {
+    margin-top: 1rem;
+    width: 50vh;
+}
+
+
 .right-container {
     width: 60%;
     height: 100vh;
