@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import { io, Socket } from "socket.io-client";
@@ -7,6 +7,7 @@ import { ServerToClientEvents, ClientToServerEvents } from "../../server/types";
 import classes from "./LoginPage.module.css";
 import background from "./assets/images/background.png";
 import logo from "./assets/images/chathouse.png";
+import SocketContext from "./store/SocketContext";
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://localhost:3001", {"autoConnect": false});
 
@@ -14,7 +15,9 @@ let username: string;
 let joinedRoom: string;
 
 function LoginPage() {
+ const SocketCtx = useContext(SocketContext);
   const navigate = useNavigate(); 
+  
   const [username, setUsername] = useState("");
   const [roomName, setRoomName] = useState("");
 
@@ -26,26 +29,30 @@ function LoginPage() {
     socket.connect();
   }
 
-  socket.on("connect_error", (err) => {
-    if(err.message = "Invalid username") {
-      console.log("Du angav ett ogilgitgt användarnamn, försök igen");
-    }
-  });
-
-  socket.on("roomList", (rooms) => {
-    console.log(rooms);
-  })
-
-  socket.on('joined', (roomName) => {
-      console.log(`joined room: ${roomName}`)
-    joinedRoom = roomName;
-  })
-
-  socket.on("connected", (username) => {
-    console.log(`Connected User: ${username}`)
-    username = username;
-    navigate('/rooms');
-  })
+  useEffect(() => {
+    socket.on("connect_error", (err) => {
+        if(err.message = "Invalid username") {
+          console.log("Invalid username, please try again.");
+        }
+      });
+    
+      socket.on("roomList", (rooms) => {
+        console.log(rooms);
+      })
+    
+      socket.on('joined', (roomName) => {
+          console.log(`joined room: ${roomName}`)
+        joinedRoom = roomName;
+      })
+    
+      socket.on("connected", (username) => {
+        console.log(`Connected User: ${username}`)
+        username = username;
+        SocketCtx!.username = username;
+        SocketCtx!.roomName = roomName;
+        navigate('/rooms');
+      })
+  }, [])
 
 
   return (
@@ -61,6 +68,7 @@ function LoginPage() {
                 name="username"
                 id="username"
                 placeholder='Enter Username'
+                autoComplete="off"
                 onChange={(event) => {
                 setUsername(event.target.value)
                 }}
