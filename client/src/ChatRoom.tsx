@@ -1,12 +1,12 @@
 
-import { io, Socket } from "socket.io-client";
-import { ServerToClientEvents, ClientToServerEvents } from "../../server/types";
-import SocketContext from "./store/SocketContext";
 import logo from "./assets/images/chathouse.png"
 import classes from "./ChatRoom.module.css"
-import background from "./assets/images/chathouse.png"
+
+
+
 
 function chatRoom() {
+
     return (
         <div className={classes['main-container']}>
             <div className={classes['left-container']}>
@@ -45,26 +45,35 @@ function chatRoom() {
                 <div className={classes['right-container-header']} >
                     <div className={classes['right-continer-header-circel']} ></div>
                     <p>Mancave2.0</p>
+
+
                 </div>
                 <div className={classes['right-continer-chat1']}>
                     <p>tjenna kelle hur e läget ? </p>
                 </div>
+                <p className={classes['writer1']} >Pelle</p>
                 <div className={classes['right-continer-chat2']}>
                     <p>fint tack fan, själv då ? </p>
                 </div>
+                <p className={classes['writer2']} >Kelle</p>
                 <div className={classes['right-continer-chat1']}>
-                    <p>tjenna kelle hur e läget ? </p>
+                    <p>jo det knattar och rullar </p>
                 </div>
+                <p className={classes['writer1']}>Pelle</p>
                 <div className={classes['right-continer-chat2']}>
-                    <p>fint tack fan, själv då ? </p>
+                    <p> amen fint rulla inte för långt bara då rullar du förbi </p>
                 </div>
+                <p className={classes['writer2']}>Kelle</p>
                 <div className={classes['right-continer-chat1']}>
-                    <p>tjenna kelle hur e läget ? </p>
+                    <p>Tack för tipset </p>
                 </div>
+                <p className={classes['writer1']}>Pelle</p>
                 <div className={classes['right-continer-chat2']}>
-                    <p>fint tack fan, själv då ? </p>
+                    <p> De vet du </p>
                 </div>
-                <input type="text" placeholder="Skriv ett meddelande " />
+                <p className={classes['writer2']}>Kelle</p>
+                <p className={classes['howIsWriting']}>Pelle skriver....</p>
+                <input className={classes['writingField']} type="text" placeholder="Skriv ett meddelande " />
 
             </div>
         </div>

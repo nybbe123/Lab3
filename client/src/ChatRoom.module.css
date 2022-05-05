@@ -68,6 +68,7 @@
     height: 1rem;
     background-color: green;
     border-radius: 50%;
+    margin: .3rem;
 }
 .right-container-header {
     height: 3rem;
@@ -88,22 +89,42 @@
 }
 .right-continer-chat1 {
     border-radius: 1rem;
-    width: 12rem;
+    width: 15rem;
     background-color: #8F4BEF;
-    margin-bottom: 3rem;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    align-items: center;
+}
+
+.writer1 {
+    display: flex;
+    margin-left: 1rem;
 
 }
 .right-continer-chat2 {
     border-radius: 1rem;
-    width: 12rem;
+    width: 15rem;
     background-color: #8F4BEF;
-    margin-bottom: 3rem;
-    justify-content:flex-end;
+    justify-content: center;
     display: flex;
     align-self: flex-end;
-
+    margin-right: 1rem;
+}
+.writer2 {
+    display: flex;
+    align-self: flex-end;
+    margin-right: 1rem;
 }
 
+.howIsWriting {
+    position: absolute;
+    bottom: 5rem;
+    margin-left: 1rem;
+}
+.writingField {
+    position: absolute;
+    bottom: 1rem;
+}
  @media (max-height: 1080px) {
     .logotype {
         position: absolute;
