@@ -22,7 +22,7 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEve
 // När en användare kopplar upp sig kör detta först som kontrollerar användarnamn & rumsnamn
 io.use((socket: Socket, next) => {
     const username: string = socket.handshake.auth.username;
-    if(!username || username.length < 2) {
+    if (!username || username.length < 2) {
         return next(new Error("Invalid username or roomname"));
     }
     socket.data.username = username;
@@ -32,7 +32,7 @@ io.use((socket: Socket, next) => {
 // Om allt är ok så körs denna
 io.on("connection", (socket) => {
     console.log("a user connected");
-    if(socket.data.username) {
+    if (socket.data.username) {
         socket.emit("connected", socket.data.username)
     }
 
@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
         const shouldBroadcastRooms: boolean = !getRooms(io).includes(room);
         socket.join(room);
 
-        if(shouldBroadcastRooms) {
+        if (shouldBroadcastRooms) {
             socket.broadcast.emit("roomList", getRooms(io));
         }
 
@@ -50,9 +50,16 @@ io.on("connection", (socket) => {
     socket.on('disconnect', () => {
         console.log('user disconnected');
     })
+
+    // socket.on("message", (message, to) => {
+    //     console.log(message, to)
+
+    //     io.to(to).emit("message", message, { id: socket.id, nickname: socket.data.nickname })
+    // })
+
 });
 
- // Removes the user that's leaving from the existing users Array and emits that new Array to all existing sockets.
+// Removes the user that's leaving from the existing users Array and emits that new Array to all existing sockets.
 /* io.on("disconnect", (socket) => {
     console.log('User disconnected', socket.id);
     users = users.filter(u => u.id !== socket.id);

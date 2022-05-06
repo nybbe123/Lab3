@@ -1,6 +1,8 @@
 
+import { Socket } from "socket.io-client";
 import logo from "./assets/images/chathouse.png"
 import classes from "./ChatRoom.module.css"
+import { ServerToClientEvents, ClientToServerEvents } from "../../server/types";
 
 
 
@@ -78,6 +80,31 @@ function chatRoom() {
             </div>
         </div>
     );
+
+
+    // }function renderForm (){
+    //     Document.body.innerHTML = "" //Tömma fältet 
+
+    //     let chatList = document.createElement("ul")
+    //     chatList.id = "messeges"
+
+    //     let chatInput = document.createElement("input")
+    //     chatInput.autocomplete = "of"
+
+    //     let chatForm = document.createElement("form")
+    //     chatForm.addEventListener("submit", () => {
+    //         event?.preventDefault()
+    //         if(chatInput.length) {
+    //             Socket.emit("message", chatInput.value, joinedRoom)
+    //         } else {
+    //             console.log("Du får inte skicka tomma meddelanden!");
+    //         }
+    //  })
+
+
+
+    //     let sendButton = document.createElement("button")
+    //     sendButton.innerText = "skicka"
 }
 
 export default chatRoom;
