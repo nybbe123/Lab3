@@ -38,7 +38,7 @@ function LoginPage() {
       socketCtx.roomName = room;
       navigate('/rooms');
     })
-  }, [navigate, socketCtx.socket]);
+  }, [navigate, socketCtx]);
 
   useEffect(() => {
     socketCtx.socket?.on("connect_error", (err) => {
