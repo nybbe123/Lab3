@@ -1,10 +1,10 @@
 import classes from "./Rooms.module.css";
 import logoMini from './assets/images/logoMini.png'
-import { useContext } from "react";
-import SocketContext from "./store/SocketContext";
+import { SocketContextType } from "./store/SocketContext";
+import { useSocket } from "./store/SocketProvider";
 
 function Rooms() {
-    const SocketCtx = useContext(SocketContext);
+    const socketCtx = useSocket() as SocketContextType;
 
     return (
         <div className={classes['main-container']}>
@@ -12,12 +12,11 @@ function Rooms() {
                 <div className={classes['logo-container']}>
                     <img src={logoMini} alt="logotype" className={classes.logotype} />
                     <div className={classes['logo-text-container']}>
-                        <h3>{SocketCtx?.username}</h3>
+                        <h3>{socketCtx.username}</h3>
                         <p>is in da ChatHouse...</p>
                     </div>
                 </div>
                 <div>
-                    <h3>{SocketCtx?.roomName}</h3>
                 </div>
             </div>
             <div className={classes['right-container']}>

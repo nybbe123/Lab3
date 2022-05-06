@@ -4,7 +4,7 @@ import { ClientToServerEvents, ServerToClientEvents } from "../../../server/type
 
 // Skapar ett interface för kontxten
 export interface SocketContextType {
-    socket: Socket<ClientToServerEvents, ServerToClientEvents> | undefined;
+    socket: Socket<ServerToClientEvents, ClientToServerEvents> | undefined;
     rooms : string [];
     username:  string;
     roomName: string;
