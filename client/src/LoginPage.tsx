@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { io, Socket } from "socket.io-client";
 import { ServerToClientEvents, ClientToServerEvents } from "../../server/types";
 
 import classes from "./LoginPage.module.css";
-import background from "./assets/images/background.png";
 import logo from "./assets/images/chathouse.png";
 import SocketContext from "./store/SocketContext";
 

@@ -1,6 +1,6 @@
 import classes from "./Rooms.module.css";
 import logoMini from './assets/images/logoMini.png'
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import SocketContext from "./store/SocketContext";
 
 function Rooms() {
