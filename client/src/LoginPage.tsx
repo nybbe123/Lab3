@@ -36,6 +36,7 @@ function LoginPage() {
     socketCtx.socket?.on('joined', (room) => {
       console.log(`Users RoomName: ${room}`)
       socketCtx.roomName = room;
+      socketCtx.rooms.push(room);
       navigate('/rooms');
     })
   }, [navigate, socketCtx]);
