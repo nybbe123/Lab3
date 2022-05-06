@@ -6,7 +6,13 @@ import SocketContext from "./store/SocketContext";
 function Rooms() {
     const SocketCtx = useContext(SocketContext);
 
+   function onSubmit() {
+       
+   }
+
+
     return (
+
         <div className={classes['main-container']}>
             <div className={classes['left-container']}>
                 <div className={classes['logo-container']}>
@@ -40,6 +46,7 @@ function Rooms() {
                     <p className={classes['writer2']}>Kelle</p>
                     <p className={classes['howIsWriting']}>{SocketCtx?.username} skriver....</p>
                     <input className={classes['writingField']} type="text" placeholder="Skriv ett meddelande " />
+                    <button className={classes['SendButton']} type="submit" >Skicka</button>
 
                 </div>
             </div>
@@ -47,4 +54,32 @@ function Rooms() {
     );
 }
 
+
 export default Rooms;
+
+
+// unction renderForm (){
+    //     Document.body.innerHTML = "" //Tömma fältet 
+    
+    //     let chatList = document.createElement("ul")
+    //     chatList.id = "messeges"
+    
+    //     let chatInput = document.createElement("input")
+    //     chatInput.autocomplete = "of"
+    
+    //     let chatForm = document.createElement("form")
+    //     chatForm.addEventListener("submit", () => {
+    //         event?.preventDefault()
+    //         if(chatInput.length) {
+    //             Socket.emit("message", chatInput.value, joinedRoom)
+    //         } else {
+    //             console.log("Du får inte skicka tomma meddelanden!");
+    //         }
+    //  })
+    
+    
+    
+    //     let sendButton = document.createElement("button")
+    //     sendButton.innerText = "skicka"
+    // }
+    
