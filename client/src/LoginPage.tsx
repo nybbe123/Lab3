@@ -39,15 +39,15 @@ function LoginPage() {
 
     socket.on('joined', (roomName) => {
       console.log(`Users RoomName: ${roomName}`)
+      SocketCtx!.roomName = roomName;
     })
 
     socket.on("connected", (username) => {
       console.log(`Connected User: ${username}`)
-      SocketCtx!.roomName = roomName;
       SocketCtx!.username = username;
       navigate('/rooms');
     })
-  })
+  },[]);
 
 
   return (
@@ -81,9 +81,7 @@ function LoginPage() {
                 }}
             />
             </div>
-            <Link to="/rooms">
               <button onClick={onHandleClick}>CONTINUE</button>
-            </Link>
         </div>
         </div>
         <div className={classes['right-container']}>

@@ -22,13 +22,13 @@ const SocketProvider: React.FC<Props> = ({children}) => {
     const [roomName, setRoomName] = useState('');
     const [rooms, setRooms] = useState<String[]>([]);
 
-    // Listar alla rum
-    // useEffect(() => {
-    //     socket?.on("roomList", (availableRooms: React.SetStateAction<String[]>) => {
-    //         console.log(rooms);
-    //         setRooms(availableRooms);
-    //     })
-    // });
+    //Listar alla rum
+    useEffect(() => {
+        socket?.on("roomList", (availableRooms: React.SetStateAction<String[]>) => {
+            console.log(rooms);
+            setRooms(availableRooms);
+        })
+    });
 
     return (
         <SocketContext.Provider value={{
