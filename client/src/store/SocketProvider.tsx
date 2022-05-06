@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
 import { ClientToServerEvents, ServerToClientEvents } from '../../../server/types';
 
@@ -24,12 +23,12 @@ const SocketProvider: React.FC<Props> = ({children}) => {
     const [rooms, setRooms] = useState<String[]>([]);
 
     // Listar alla rum
-    useEffect(() => {
-        socket?.on("roomList", (availableRooms: React.SetStateAction<String[]>) => {
-            console.log(rooms);
-            setRooms(availableRooms);
-        })
-    });
+    // useEffect(() => {
+    //     socket?.on("roomList", (availableRooms: React.SetStateAction<String[]>) => {
+    //         console.log(rooms);
+    //         setRooms(availableRooms);
+    //     })
+    // });
 
     return (
         <SocketContext.Provider value={{

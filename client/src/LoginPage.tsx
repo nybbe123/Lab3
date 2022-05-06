@@ -2,13 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
 
 import { io, Socket } from "socket.io-client";
-import { ServerToClientEvents, ClientToServerEvents } from "../../types";
+import { ServerToClientEvents, ClientToServerEvents } from "../../server/types";
 
 import classes from "./LoginPage.module.css";
 import background from "./assets/images/background.png";
 import logo from "./assets/images/chathouse.png";
 import SocketContext from "./store/SocketContext";
-import { join } from "path";
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://localhost:3001", {"autoConnect": false});
 
@@ -33,26 +32,22 @@ function LoginPage() {
 
   useEffect(() => {
     socket.on("connect_error", (err) => {
-        if(err.message = "Invalid username") {
+        if(err.message === "Invalid username") {
           console.log("Invalid username, please try again.");
         }
     })
-    }, [])
 
-    useEffect(() => {
-        socket.on('joined', (roomName) => {
-            console.log(`Users RoomName: ${roomName}`)
-        })
-    }, [])
+    socket.on('joined', (roomName) => {
+      console.log(`Users RoomName: ${roomName}`)
+    })
 
-    useEffect(() => {
-        socket.on("connected", (username) => {
-            console.log(`Connected User: ${username}`)
-            SocketCtx!.roomName = roomName;
-            SocketCtx!.username = username;
-            navigate('/rooms');
-        })
-    }, [])
+    socket.on("connected", (username) => {
+      console.log(`Connected User: ${username}`)
+      SocketCtx!.roomName = roomName;
+      SocketCtx!.username = username;
+      navigate('/rooms');
+    })
+  })
 
 
   return (
