@@ -17,6 +17,7 @@ function Rooms() {
                     </div>
                 </div>
                 <div>
+                    <h3>{socketCtx.roomName}</h3>
                 </div>
             </div>
             <div className={classes['right-container']}>
