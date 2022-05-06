@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import { ClientToServerEvents, ServerToClientEvents } from "../../../server/types";
+import { ClientToServerEvents, ServerToClientEvents } from '../../../server/types';
 
 import SocketContext, {SocketContextType} from "./SocketContext";
 
@@ -17,11 +17,18 @@ interface Props {
 
 // Skapar en provider för kontexten
 const SocketProvider: React.FC<Props> = ({children}) => {
+    const [socket, setSocket] = useState<Socket<ServerToClientEvents, ClientToServerEvents>>();
+    const [username, setUsername] = useState('');
+    const [roomName, setRoomName] = useState('');
+    const [rooms, setRooms] = useState<String[]>([]);
 
-    const [username, setUsername] = useState("");
-    const [roomName, setRoomName] = useState("");
-    // state
-    // rummen, nickname, valt rum, aktuela chatten
+    //Listar alla rum
+    useEffect(() => {
+        socket?.on("roomList", (availableRooms: React.SetStateAction<String[]>) => {
+            console.log(rooms);
+            setRooms(availableRooms);
+        })
+    });
 
     return (
         <SocketContext.Provider value={{

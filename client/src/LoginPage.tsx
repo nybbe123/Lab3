@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
 
 import { io, Socket } from "socket.io-client";
-import { ServerToClientEvents, ClientToServerEvents } from "../../types";
+import { ServerToClientEvents, ClientToServerEvents } from "../../server/types";
 
 import classes from "./LoginPage.module.css";
 import background from "./assets/images/background.png";
@@ -10,9 +10,6 @@ import logo from "./assets/images/chathouse.png";
 import SocketContext from "./store/SocketContext";
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://localhost:3001", {"autoConnect": false});
-
-let username: string;
-let joinedRoom: string;
 
 function LoginPage() {
  const SocketCtx = useContext(SocketContext);
@@ -25,35 +22,32 @@ function LoginPage() {
     socket.auth = {
       username: username,
     }
+    if(!roomName.length) {
+        console.log('Ogiltigt namn på rummet...')
+        return;
+    }
     socket.emit('join', roomName);
-    socket.connect();
-    
+    socket.connect(); 
   }
 
   useEffect(() => {
     socket.on("connect_error", (err) => {
-        if(err.message = "Invalid username") {
+        if(err.message === "Invalid username") {
           console.log("Invalid username, please try again.");
         }
-      });
-    
-      socket.on("roomList", (rooms) => {
-        console.log(rooms);
-      })
-    
-      socket.on('joined', (roomName) => {
-          console.log(`joined room: ${roomName}`)
-        joinedRoom = roomName;
-      })
-    
-      socket.on("connected", (username) => {
-        console.log(`Connected User: ${username}`)
-        username = username;
-        SocketCtx!.username = username;
-        SocketCtx!.roomName = roomName;
-        navigate('/rooms');
-      })
-  }, [])
+    })
+
+    socket.on('joined', (roomName) => {
+      console.log(`Users RoomName: ${roomName}`)
+      SocketCtx!.roomName = roomName;
+    })
+
+    socket.on("connected", (username) => {
+      console.log(`Connected User: ${username}`)
+      SocketCtx!.username = username;
+      navigate('/rooms');
+    })
+  },[]);
 
 
   return (
@@ -87,9 +81,7 @@ function LoginPage() {
                 }}
             />
             </div>
-            <Link to="/rooms">
               <button onClick={onHandleClick}>CONTINUE</button>
-            </Link>
         </div>
         </div>
         <div className={classes['right-container']}>

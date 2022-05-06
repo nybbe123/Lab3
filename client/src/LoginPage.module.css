@@ -43,6 +43,7 @@
 
 .left-container button {
     margin-top: 2rem;
+    width: 100%;
 }
 
 .left-container button:hover {

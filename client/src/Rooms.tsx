@@ -1,10 +1,11 @@
 import classes from "./Rooms.module.css";
 import logoMini from './assets/images/logoMini.png'
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import SocketContext from "./store/SocketContext";
 
 function Rooms() {
     const SocketCtx = useContext(SocketContext);
+
     return (
         <div className={classes['main-container']}>
             <div className={classes['left-container']}>
@@ -16,7 +17,7 @@ function Rooms() {
                     </div>
                 </div>
                 <div>
-
+                    <h3>{SocketCtx?.roomName}</h3>
                 </div>
             </div>
             <div className={classes['right-container']}>

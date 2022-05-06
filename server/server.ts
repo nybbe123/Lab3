@@ -2,15 +2,13 @@ import express from "express";
 import http from "http"; //Req to build server with socket.io
 import cors from "cors"; //Req for secure cross-origin requests and data transfers between browsers and servers.
 import { Server, Socket } from "socket.io";
-import { ClientToServerEvents, ServerToClientEvents, InterServerEvents, ServerSocketData } from "../types";
+import { ClientToServerEvents, ServerToClientEvents, InterServerEvents, ServerSocketData } from "./types";
 import { getRooms } from "./roomStore";
 
 const app = express();
 app.use(cors());
 const server = http.createServer(app);
 var port = process.env.PORT || 3001;
-
-let users = [];
 
 const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, ServerSocketData>(server, {
     cors: {
@@ -23,7 +21,7 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEve
 io.use((socket: Socket, next) => {
     const username: string = socket.handshake.auth.username;
     if(!username || username.length < 2) {
-        return next(new Error("Invalid username or roomname"));
+        return next(new Error("Invalid username"));
     }
     socket.data.username = username;
     next();
@@ -33,7 +31,8 @@ io.use((socket: Socket, next) => {
 io.on("connection", (socket) => {
     console.log("a user connected");
     if(socket.data.username) {
-        socket.emit("connected", socket.data.username)
+        socket.emit("connected", socket.data.username);
+        socket.emit("roomList", getRooms(io));
     }
 
     socket.on("join", (room) => {
@@ -52,15 +51,11 @@ io.on("connection", (socket) => {
     })
 
      // Removes the user that's leaving from the existing users Array and emits that new Array to all existing sockets.
-    socket.on("disconnect", (socket) => {
-        console.log('User disconnected', socket.id);
-        users = users.filter(u => u.id !== socket.id);
-    io.emit("userlist", users);
+    // socket.on("disconnect", (socket) => {
+    //     console.log('User disconnected', socket.id);
+    //     users = users.filter(u => u.id !== socket.id);
+    // io.emit("userlist", users);
 })
-
-});
-
-
 
 // Serverlyssnare
 server.listen(port, () => {
