@@ -3,6 +3,8 @@ import logoMini from './assets/images/logoMini.png'
 import { SocketContextType } from "./store/SocketContext";
 import { useSocket } from "./store/SocketProvider";
 
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 function Rooms() {
     const socketCtx = useSocket() as SocketContextType;
 
@@ -16,8 +18,14 @@ function Rooms() {
                         <p>is in da ChatHouse...</p>
                     </div>
                 </div>
-                <div>
-                    <h3>{socketCtx.roomName}</h3>
+                <div className={classes['room-container']}>
+                    {socketCtx.rooms.map((room, index) => (
+                      <button className={classes['room-btn']} key={index}>
+                          {room}
+                          <ArrowForwardIosIcon />
+                      </button>  
+                    ))}
+                    {/* <h3>{socketCtx.roomName}</h3> */}
                 </div>
             </div>
             <div className={classes['right-container']}>

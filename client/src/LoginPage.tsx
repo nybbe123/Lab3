@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import classes from "./LoginPage.module.css";
@@ -8,44 +8,45 @@ import { useSocket } from "./store/SocketProvider";
 
 function LoginPage() {
   const socketCtx = useSocket() as SocketContextType;
-  const navigate = useNavigate(); 
-  
+  const navigate = useNavigate();
+
   const [name, setUsername] = useState("");
   const [room, setRoomName] = useState("");
 
   function onHandleClick() {
-    if(!name.length) {
-        console.log('Username & roomname required...')
-        return;
+    if (!name.length) {
+      console.log("Username & roomname required...");
+      return;
     }
     socketCtx.socket!.auth = {
       username: name,
-    }
+    };
     socketCtx.socket!.emit("join", room);
-    socketCtx.socket!.connect(); 
+    socketCtx.socket!.connect();
   }
-    
+
   useEffect(() => {
     socketCtx.socket?.on("connected", (name) => {
-      console.log(`Connected User: ${name}`)
+      console.log(`Connected User: ${name}`);
       socketCtx.username = name;
-    })
+    });
   }, [socketCtx]);
-    
+
   useEffect(() => {
-    socketCtx.socket?.on('joined', (room) => {
-      console.log(`Users RoomName: ${room}`)
+    socketCtx.socket?.on("joined", (room) => {
+      console.log(`Users RoomName: ${room}`);
       socketCtx.roomName = room;
+      socketCtx.rooms.push(room);
       navigate('/rooms');
     })
   }, [navigate, socketCtx]);
 
   useEffect(() => {
     socketCtx.socket?.on("connect_error", (err) => {
-      if(err.message === "Invalid username") {
+      if (err.message === "Invalid username") {
         console.log("Invalid username, please try again.");
       }
-    })
+    });
   }, [socketCtx.socket]);
 
   return (
@@ -73,8 +74,8 @@ function LoginPage() {
               type="text"
               name="roomname"
               id="roomname"
-              placeholder="Enter Chatroom Name"
               autoComplete="off"
+              placeholder="Enter Chatroom Name"
               onChange={(event) => {
                 setRoomName(event.target.value);
               }}

@@ -38,6 +38,18 @@
     justify-content: center;
 }
 
+.room-container {
+    width: 80%;
+}
+
+.room-btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
 .right-container {
     width: 60%;
     height: 100vh;
