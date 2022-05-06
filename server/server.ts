@@ -35,12 +35,12 @@ io.on("connection", (socket) => {
         socket.emit("roomList", getRooms(io));
     }
 
-    socket.on("join", (room) => {
+    socket.on("join", (room: string) => {
         const shouldBroadcastRooms: boolean = !getRooms(io).includes(room);
-        socket.join(room);
 
+        socket.join(room);
         if(shouldBroadcastRooms) {
-            socket.broadcast.emit("roomList", getRooms(io));
+            io.emit("roomList", getRooms(io));
         }
 
         socket.emit("joined", room);

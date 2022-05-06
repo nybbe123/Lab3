@@ -1,56 +1,52 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, Routes, Route, useNavigate } from "react-router-dom";
-
-import { io, Socket } from "socket.io-client";
-import { ServerToClientEvents, ClientToServerEvents } from "../../server/types";
+import React, { useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 
 import classes from "./LoginPage.module.css";
-import background from "./assets/images/background.png";
 import logo from "./assets/images/chathouse.png";
-import SocketContext from "./store/SocketContext";
-
-const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
-  "http://localhost:3001",
-  { autoConnect: false }
-);
+import { SocketContextType } from "./store/SocketContext";
+import { useSocket } from "./store/SocketProvider";
 
 function LoginPage() {
-  const SocketCtx = useContext(SocketContext);
-  const navigate = useNavigate();
-
-  const [username, setUsername] = useState("");
-  const [roomName, setRoomName] = useState("");
+  const socketCtx = useSocket() as SocketContextType;
+  const navigate = useNavigate(); 
+  
+  const [name, setUsername] = useState("");
+  const [room, setRoomName] = useState("");
 
   function onHandleClick() {
-    socket.auth = {
-      username: username,
-    };
-    if (!roomName.length) {
-      console.log("Ogiltigt namn på rummet...");
-      return;
+    if(!name.length) {
+        console.log('Username & roomname required...')
+        return;
     }
-    socket.emit("join", roomName);
-    socket.connect();
+    socketCtx.socket!.auth = {
+      username: name,
+    }
+    socketCtx.socket!.emit("join", room);
+    socketCtx.socket!.connect(); 
   }
+    
+  useEffect(() => {
+    socketCtx.socket?.on("connected", (name) => {
+      console.log(`Connected User: ${name}`)
+      socketCtx.username = name;
+    })
+  }, [socketCtx]);
+    
+  useEffect(() => {
+    socketCtx.socket?.on('joined', (room) => {
+      console.log(`Users RoomName: ${room}`)
+      socketCtx.roomName = room;
+      navigate('/rooms');
+    })
+  }, [navigate, socketCtx]);
 
   useEffect(() => {
-    socket.on("connect_error", (err) => {
-      if (err.message === "Invalid username") {
+    socketCtx.socket?.on("connect_error", (err) => {
+      if(err.message === "Invalid username") {
         console.log("Invalid username, please try again.");
       }
-    });
-
-    socket.on("connected", (username) => {
-      console.log(`Connected User: ${username}`);
-      SocketCtx!.username = username;
-    });
-
-    socket.on("joined", (roomName) => {
-      console.log(`Users RoomName: ${roomName}`);
-      SocketCtx!.roomName = roomName;
-      navigate("/rooms");
-    });
-  }, []);
+    })
+  }, [socketCtx.socket]);
 
   return (
     <div className={classes["main-container"]}>

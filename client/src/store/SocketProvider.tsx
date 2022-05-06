@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { ClientToServerEvents, ServerToClientEvents } from '../../../server/types';
 
@@ -17,14 +18,12 @@ interface Props {
 
 // Skapar en provider för kontexten
 const SocketProvider: React.FC<Props> = ({children}) => {
-    const [socket, setSocket] = useState<Socket<ServerToClientEvents, ClientToServerEvents>>();
-    const [username, setUsername] = useState('');
-    const [roomName, setRoomName] = useState('');
+    const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io();
     const [rooms, setRooms] = useState<String[]>([]);
 
     //Listar alla rum
     useEffect(() => {
-        socket?.on("roomList", (availableRooms: React.SetStateAction<String[]>) => {
+        socket?.on("roomList", (availableRooms) => {
             console.log(rooms);
             setRooms(availableRooms);
         })
@@ -32,7 +31,7 @@ const SocketProvider: React.FC<Props> = ({children}) => {
 
     return (
         <SocketContext.Provider value={{
-            socket: io({
+            socket: io("http://localhost:3001",{
                 autoConnect: false
             }),
             rooms: [],
@@ -46,3 +45,4 @@ const SocketProvider: React.FC<Props> = ({children}) => {
 }
 
 export default SocketProvider;
+export const useSocket = () => useContext(SocketContext);
