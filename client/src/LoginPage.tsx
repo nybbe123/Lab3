@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import classes from "./LoginPage.module.css";
@@ -38,7 +38,7 @@ function LoginPage() {
       socketCtx.roomName = room;
       navigate("/rooms");
     });
-  }, [navigate, socketCtx.socket]);
+  }, [navigate, socketCtx]);
 
   useEffect(() => {
     socketCtx.socket?.on("connect_error", (err) => {
