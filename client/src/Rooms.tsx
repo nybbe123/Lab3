@@ -21,10 +21,29 @@ function Rooms() {
                 </div>
             </div>
             <div className={classes['right-container']}>
-                <h3>Select Da ChatRoom Of Your Choise</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem molestias nulla doloremque, quo rerum assumenda veritatis quam quasi. Vel maiores ex dolorum dolor unde corporis quos temporibus aspernatur.</p>
+                <div className={classes['right-container-header']} >
+                    <div className={classes['right-continer-header-circel']} ></div>
+                    <p>Mancave2.0</p>
+                    <h3 className={classes['chatName']} >{SocketCtx?.username}</h3>
+
+                </div>
+                <div className={classes['right-container-chat']} >
+                    <div className={classes['right-continer-chat1']}>
+                        <p>tjenna pelle hur e läget ? </p>
+                    </div>
+                    <p className={classes['writer1']} >{SocketCtx?.username}</p>
+                    <div className={classes['right-continer-chat2']}>
+                        <p>fint tack fan, själv då ? </p>
+                    </div>
+
+
+                    <p className={classes['writer2']}>Kelle</p>
+                    <p className={classes['howIsWriting']}>{SocketCtx?.username} skriver....</p>
+                    <input className={classes['writingField']} type="text" placeholder="Skriv ett meddelande " />
+
+                </div>
             </div>
-    </div>
+        </div>
     );
 }
 
