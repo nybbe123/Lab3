@@ -37,14 +37,14 @@ function LoginPage() {
         }
     })
 
-    socket.on('joined', (roomName) => {
-      console.log(`Users RoomName: ${roomName}`)
-      SocketCtx!.roomName = roomName;
-    })
-
     socket.on("connected", (username) => {
       console.log(`Connected User: ${username}`)
       SocketCtx!.username = username;
+    })
+
+    socket.on('joined', (roomName) => {
+      console.log(`Users RoomName: ${roomName}`)
+      SocketCtx!.roomName = roomName;
       navigate('/rooms');
     })
   },[]);
