@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
-import { ClientToServerEvents, ServerToClientEvents } from "../../../server/types";
+import { ClientToServerEvents, ServerToClientEvents } from '../../../server/types';
 
 import SocketContext, {SocketContextType} from "./SocketContext";
 
@@ -25,9 +25,9 @@ const SocketProvider: React.FC<Props> = ({children}) => {
 
     // Listar alla rum
     useEffect(() => {
-        socket?.on("roomList", (AvailableRooms) => {
+        socket?.on("roomList", (availableRooms: React.SetStateAction<String[]>) => {
             console.log(rooms);
-            setRooms(AvailableRooms);
+            setRooms(availableRooms);
         })
     });
 
