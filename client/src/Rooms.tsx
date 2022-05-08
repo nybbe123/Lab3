@@ -7,6 +7,9 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 function Rooms() {
     const socketCtx = useSocket() as SocketContextType;
+    let availableRooms = socketCtx.rooms.filter((room) => {
+        return room !== socketCtx.roomName;
+    })
 
     return (
         <div className={classes['main-container']}>
@@ -19,14 +22,22 @@ function Rooms() {
                     </div>
                 </div>
                 <div className={classes['room-container']}>
-                    <h4>Available rooms</h4>
-                    {socketCtx.rooms.map((room, index) => (
-                      <button className={classes['room-btn']} key={index}>
-                          {room}
-                          <ArrowForwardIosIcon />
-                      </button>  
-                    ))}
-                    {/* <h3>{socketCtx.roomName}</h3> */}
+                    <div className={classes['own-room']}>
+                        <h4>Your Room:</h4>
+                        <button className={classes['room-btn']}>
+                            {socketCtx.roomName}
+                            <ArrowForwardIosIcon />
+                        </button>
+                    </div>
+                    <div className={classes['other-rooms']}>
+                        <h4>Available rooms:</h4>
+                        {availableRooms.map((availableRoom, index) => (
+                            <button className={classes['room-btn']} key={index}>
+                            {availableRoom}
+                            <ArrowForwardIosIcon />
+                            </button>  
+                        ))}
+                    </div>
                 </div>
             </div>
             <div className={classes['right-container']}>
