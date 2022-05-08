@@ -19,6 +19,7 @@ function Rooms() {
                     </div>
                 </div>
                 <div className={classes['room-container']}>
+                    <h4>Available rooms</h4>
                     {socketCtx.rooms.map((room, index) => (
                       <button className={classes['room-btn']} key={index}>
                           {room}
