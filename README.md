@@ -13,7 +13,7 @@ En användare kan skapa ett nytt rum där det är möjligt att chatta med andra 
 ## Kom igång:
 1. Öppna terminalen och skriv `npm i`.
 2. Öppna terminalen, skriv `cd server` och därefter `npm start`.
-3. Öppna ett nytt terminalfösnter, skriv `cd client` och därefter `npm start`.
+3. Öppna ett nytt terminalfönster, skriv `cd client` och därefter `npm start`.
 4. Öppna därefter din browser och skriv in http://localhost:3000
 
 ## Betygskriterier
