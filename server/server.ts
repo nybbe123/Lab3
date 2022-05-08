@@ -31,8 +31,8 @@ io.use((socket: Socket, next) => {
 io.on("connection", (socket) => {
     console.log("a user connected");
     if(socket.data.username) {
-        socket.emit("connected", socket.data.username);
         socket.emit("roomList", getRooms(io));
+        socket.emit("connected", socket.data.username);
     }
 
     socket.on("join", (room: string) => {

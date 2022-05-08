@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
+import React, { useState } from "react";
 import classes from "./LoginPage.module.css";
 import logo from "./assets/images/chathouse.png";
 import { SocketContextType } from "./store/SocketContext";
@@ -8,13 +6,11 @@ import { useSocket } from "./store/SocketProvider";
 
 function LoginPage() {
   const socketCtx = useSocket() as SocketContextType;
-  const navigate = useNavigate();
-
   const [name, setUsername] = useState("");
   const [room, setRoomName] = useState("");
 
   function onHandleClick() {
-    if (!name.length) {
+    if (!name.length && !room.length) {
       console.log("Username & roomname required...");
       return;
     }
@@ -24,30 +20,6 @@ function LoginPage() {
     socketCtx.socket!.emit("join", room);
     socketCtx.socket!.connect();
   }
-
-  useEffect(() => {
-    socketCtx.socket?.on("connected", (name) => {
-      console.log(`Connected User: ${name}`);
-      socketCtx.username = name;
-    });
-  }, [socketCtx]);
-
-  useEffect(() => {
-    socketCtx.socket?.on("joined", (room) => {
-      console.log(`Users RoomName: ${room}`);
-      socketCtx.roomName = room;
-      socketCtx.rooms.push(room);
-      navigate('/rooms');
-    })
-  }, [navigate, socketCtx]);
-
-  useEffect(() => {
-    socketCtx.socket?.on("connect_error", (err) => {
-      if (err.message === "Invalid username") {
-        console.log("Invalid username, please try again.");
-      }
-    });
-  }, [socketCtx.socket]);
 
   return (
     <div className={classes["main-container"]}>
