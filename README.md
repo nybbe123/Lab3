@@ -11,8 +11,9 @@ En användare kan skapa ett nytt rum där det är möjligt att chatta med andra 
 * *Simon Eriksson* (https://github.com/Vacannot)
 
 ## Kom igång:
-Öppna terminalen och skriv `npm i`
-följt av `npm start`.
+1. Öppna terminalen och skriv `npm i`.
+2. I terminalen - cd till server och skriv in npm start.
+3. I terminalen - cd till client och skriv in npm start.
 Öppna därefter din browser och skriv in http://localhost:3000
 
 ## Betygskriterier
