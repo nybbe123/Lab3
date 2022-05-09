@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import classes from "./LoginPage.module.css";
 import logo from "./assets/images/chathouse.png";
-import { SocketContextType } from "./store/SocketContext";
 import { useSocket } from "./store/SocketProvider";
 
 function LoginPage() {
-  const socketCtx = useSocket() as SocketContextType;
+  const socketCtx = useSocket();
   const [name, setUsername] = useState("");
   const [room, setRoomName] = useState("");
 

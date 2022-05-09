@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
 import { ClientToServerEvents, ServerToClientEvents } from '../../../server/types';
@@ -10,21 +10,25 @@ interface Props {
 
 // Skapar en provider för kontexten
 const SocketProvider: React.FC<Props> = ({children}) => {
-    const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://localhost:3001",{
-        autoConnect: false
-    });
     const navigate = useNavigate();
+    const [socket] = useState<Socket<ServerToClientEvents, ClientToServerEvents>>(io("http://localhost:3001", {
+        autoConnect: false
+    }));
     const [rooms, setRooms] = useState<string[]>([]);
     const [name, setUser] = useState<string>('');
     const [room, setRoom] = useState<string>('');
 
     useEffect(() => {
-        socket.on("connected", (name) => {
+        const listener = (name: string) => {
             console.log(`Connected User: ${name}`);
             setUser(name);
             navigate('/rooms');
-        });
-    });
+        };
+
+
+        socket.on("connected", listener);
+        return () => { socket.off('connected', listener); };
+    }, [navigate, socket]);
     
     //Listar alla rum
     useEffect(() => {
