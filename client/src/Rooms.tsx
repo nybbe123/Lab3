@@ -40,11 +40,10 @@ function Rooms() {
                     <div className={classes['other-rooms']}>
                         <h4>Available rooms:</h4>
                         {rooms.map((room, index) => (
-                            // todo: check room with roomName and add CSS active class
-                            <button onClick={() => switchRoomHandler(room)} className={classes['room-btn']} key={index}>
-                            {room}
-                            <ArrowForwardIosIcon />
-                            </button>  
+                            <button onClick={() => switchRoomHandler(room)} className={classes[room === roomName ?'room-btn-active' : 'room-btn']} key={index}>
+                                {room}
+                                <ArrowForwardIosIcon />
+                            </button>
                         ))}
                     </div>
                     <div>
@@ -71,7 +70,7 @@ function Rooms() {
             <div className={classes['right-container']}>
                 {roomName ? (
                     <div>
-                        Cha cha bloggen
+                       <p>Cha cha bloggen, Empaboi här, idag har jag ätit en sallad och knappat på datorn</p>
                     </div>
                 ): (
                     <div>
