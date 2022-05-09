@@ -41,6 +41,7 @@ function Rooms() {
                             </button>  
                         ))}
                     </div>
+                    <div> <h2>Create Room</h2></div>
                 </div>
             </div>
             <div className={classes['right-container']}>
