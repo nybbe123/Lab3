@@ -25,33 +25,38 @@ const SocketProvider: React.FC<Props> = ({children}) => {
             navigate('/rooms');
         };
 
-
         socket.on("connected", listener);
         return () => { socket.off('connected', listener); };
     }, [navigate, socket]);
-    
+
     //Listar alla rum
     useEffect(() => {
-        socket.on("roomList", (availableRooms) => {
+        const listener = (availableRooms: string[]) => {
             console.log(availableRooms);
             setRooms(availableRooms);
-        })
-    });
+        };
+
+        socket.on("roomList", listener);
+        return () => { socket.off('roomList', listener); };
+    }, [socket]);
 
     useEffect(() => {
-        socket.on("joined", (room) => {
+        const listener = (room: string) => {
             console.log(`Users RoomName: ${room}`);
             setRoom(room);
-        })
-      });
+        };
 
-      useEffect(() => {
+        socket.on("joined", listener);
+        return () => { socket.off('joined', listener) }
+    }, [socket]);
+
+    useEffect(() => {
         socket.on("connect_error", (err) => {
             if (err.message === "Invalid username") {
                 console.log("Invalid username, please try again.");
             }
         });
-      });
+    });
 
     return (
         <SocketContext.Provider value={{
