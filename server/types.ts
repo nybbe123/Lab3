@@ -6,13 +6,15 @@ export interface ServerToClientEvents {
     roomList: (rooms: string[]) => void;
     joined: (room: string) => void;
     _error: (errorMessage: string) => void;
-    userlist: (userlist: string[]) => void;
+    userList: (users: string[]) => void;
+    left: (room: string) => void;
   }
   
   // All events going from the client to the server and their predefined types
   export interface ClientToServerEvents {
     message: (message: string, to: string) => void;
     join: (room: string) => void;
+    leave: (room: string) => void;
   }
   
   // All internal server events and their predifned types

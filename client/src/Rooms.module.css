@@ -4,7 +4,7 @@
 
 .left-container {
     position: relative;
-    width: 40%;
+    width: 50%;
     height: 100vh;
     background-color: #fff;
     display: flex;
@@ -47,6 +47,7 @@
     justify-content: center;
     gap: 2rem;
     width: 80%;
+    
 }
 
 .own-room {
@@ -63,6 +64,30 @@
     gap: 1rem;
 }
 
+
+.create-room-main {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 5rem;
+
+}
+
+.create-rooms {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+    
+    
+}
+
+.create-room-btn {
+    width: 40vh;
+margin-top: 1rem;
+
+}
 .room-btn {
     width: 100%;
     display: flex;

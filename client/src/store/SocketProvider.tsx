@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
 import { ClientToServerEvents, ServerToClientEvents } from '../../../server/types';
@@ -17,6 +17,8 @@ const SocketProvider: React.FC<Props> = ({children}) => {
     const [rooms, setRooms] = useState<string[]>([]);
     const [name, setUser] = useState<string>('');
     const [room, setRoom] = useState<string>('');
+    // const [users, setUsers] = useState<string[]>([]);
+
 
     useEffect(() => {
         const listener = (name: string) => {
@@ -29,7 +31,7 @@ const SocketProvider: React.FC<Props> = ({children}) => {
         return () => { socket.off('connected', listener); };
     }, [navigate, socket]);
 
-    //Listar alla rum
+
     useEffect(() => {
         const listener = (availableRooms: string[]) => {
             console.log(availableRooms);
@@ -40,6 +42,18 @@ const SocketProvider: React.FC<Props> = ({children}) => {
         return () => { socket.off('roomList', listener); };
     }, [socket]);
 
+
+    // useEffect(() => {
+    //     const listener = (users: string[]) => {
+    //         console.log(users);
+    //         setUsers(users);
+    //     }
+
+    //     socket.on("userList", listener);
+    //     return () => { socket.off("userList", listener); };
+    // }, [socket]);
+
+
     useEffect(() => {
         const listener = (room: string) => {
             console.log(`Users RoomName: ${room}`);
@@ -49,6 +63,17 @@ const SocketProvider: React.FC<Props> = ({children}) => {
         socket.on("joined", listener);
         return () => { socket.off('joined', listener) }
     }, [socket]);
+
+
+    useEffect(() => {
+        const listener = (room: string) => {
+            console.log(`left room: ${room}`);
+        };
+
+        socket.on("left", listener);
+        return () => { socket.off('left', listener) }
+    }, [socket]);
+
 
     useEffect(() => {
         socket.on("connect_error", (err) => {
@@ -64,6 +89,7 @@ const SocketProvider: React.FC<Props> = ({children}) => {
             rooms,
             username: name,
             roomName: room,
+            // users,
         }
         }>
         {children}

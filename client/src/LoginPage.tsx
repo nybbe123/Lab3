@@ -6,17 +6,15 @@ import { useSocket } from "./store/SocketProvider";
 function LoginPage() {
   const socketCtx = useSocket();
   const [name, setUsername] = useState("");
-  const [room, setRoomName] = useState("");
 
   function onHandleClick() {
-    if (!name.length && !room.length) {
+    if (!name.length) {
       console.log("Username & roomname required...");
       return;
     }
     socketCtx.socket!.auth = {
       username: name,
     };
-    socketCtx.socket!.emit("join", room);
     socketCtx.socket!.connect();
   }
 
@@ -36,19 +34,6 @@ function LoginPage() {
               autoComplete="off"
               onChange={(event) => {
                 setUsername(event.target.value);
-              }}
-            />
-          </div>
-          <div className={classes["room-container"]}>
-            <label htmlFor="roomname">Room Name</label>
-            <input
-              type="text"
-              name="roomname"
-              id="roomname"
-              autoComplete="off"
-              placeholder="Enter Chatroom Name"
-              onChange={(event) => {
-                setRoomName(event.target.value);
               }}
             />
           </div>

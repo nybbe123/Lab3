@@ -5,9 +5,10 @@ import { ClientToServerEvents, ServerToClientEvents } from "../../../server/type
 // Skapar ett interface för kontxten
 export interface SocketContextType {
     socket: Socket<ServerToClientEvents, ClientToServerEvents>;
-    rooms : string [];
+    rooms: string [];
     username:  string;
     roomName: string;
+    // users: string[];
 };
 
 // Skapar själva kontexten av interfacet SocketContextType

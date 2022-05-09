@@ -3,15 +3,27 @@ import logoMini from './assets/images/logoMini.png'
 import { useSocket } from "./store/SocketProvider";
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useState } from "react";
 
 function Rooms() {
     const { rooms, socket, roomName, username } = useSocket();
-    let availableRooms = rooms.filter((room) => {
-        return room !== roomName;
-    })
+    const [room, setRoomName] = useState("");
+    // let availableRooms = rooms.filter((room) => {
+    //     return room !== roomName;
+    // })
 
-    const joinRoomHandler = (roomName: string) => {
-        socket.emit('join', roomName)
+    const joinRoomHandler = () => {
+        if (!room.length) {
+            console.log("Username & roomname required...");
+            return;
+        }
+        socket.emit('join', room);
+
+    }
+
+    const switchRoomHandler = (room: string) => {
+        socket.emit('leave', roomName);
+        socket.emit('join', room);
     }
 
     return (
@@ -25,28 +37,48 @@ function Rooms() {
                     </div>
                 </div>
                 <div className={classes['room-container']}>
-                    <div className={classes['own-room']}>
-                        <h4>Your Room:</h4>
-                        <button className={classes['room-btn']}>
-                            {roomName}
-                            <ArrowForwardIosIcon />
-                        </button>
-                    </div>
                     <div className={classes['other-rooms']}>
                         <h4>Available rooms:</h4>
-                        {availableRooms.map((availableRoom, index) => (
-                            <button onClick={() => joinRoomHandler(availableRoom)} className={classes['room-btn']} key={index}>
-                            {availableRoom}
+                        {rooms.map((room, index) => (
+                            // todo: check room with roomName and add CSS active class
+                            <button onClick={() => switchRoomHandler(room)} className={classes['room-btn']} key={index}>
+                            {room}
                             <ArrowForwardIosIcon />
                             </button>  
                         ))}
                     </div>
-                    <div> <h2>Create Room</h2></div>
+                    <div>
                 </div>
+                    <div className={classes['create-room-main']}>
+                        <h2>Create Room</h2>
+    
+                        <div className={classes['create-rooms']}>
+                            <input
+                                type="text"
+                                name="roomname"
+                                id="roomname"
+                                autoComplete="off"
+                                placeholder="Enter Chatroom Name"
+                                onChange={(event) => {
+                                    setRoomName(event.target.value);
+                                }}
+                            />
+                            <button onClick={() => joinRoomHandler()} className={classes['create-room-btn']}>CREATE</button>
+                            </div>
+                        </div>
+                    </div>
             </div>
             <div className={classes['right-container']}>
-                <h3>Select Da ChatRoom Of Your Choise</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem molestias nulla doloremque, quo rerum assumenda veritatis quam quasi. Vel maiores ex dolorum dolor unde corporis quos temporibus aspernatur.</p>
+                {roomName ? (
+                    <div>
+                        Cha cha bloggen
+                    </div>
+                ): (
+                    <div>
+                        <h3>Create A Chatroom</h3>
+                        <p>Start a chat! Stay connected with your friends and family! Let's chat and have fun together!</p>
+                    </div>
+                )}
             </div>
     </div>
     );
