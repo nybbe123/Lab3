@@ -4,13 +4,13 @@ import { ClientToServerEvents, ServerToClientEvents } from "../../../server/type
 
 // Skapar ett interface för kontxten
 export interface SocketContextType {
-    socket: Socket<ServerToClientEvents, ClientToServerEvents> | undefined;
+    socket: Socket<ServerToClientEvents, ClientToServerEvents>;
     rooms : string [];
     username:  string;
     roomName: string;
 };
 
 // Skapar själva kontexten av interfacet SocketContextType
-const SocketContext = React.createContext<SocketContextType | null>(null);
+const SocketContext = React.createContext<SocketContextType>(null as any);
 
 export default SocketContext;
