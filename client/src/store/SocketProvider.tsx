@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
-import { ClientToServerEvents, ServerToClientEvents } from '../../../server/types';
+import { ClientToServerEvents, Message, ServerToClientEvents } from '../../../server/types';
 import SocketContext from "./SocketContext";
 
 interface Props {
     children: React.ReactNode
-  };
+};
 
 // Skapar en provider för kontexten
-const SocketProvider: React.FC<Props> = ({children}) => {
+const SocketProvider: React.FC<Props> = ({ children }) => {
     const navigate = useNavigate();
     const [socket] = useState<Socket<ServerToClientEvents, ClientToServerEvents>>(io("http://localhost:3001", {
         autoConnect: false
@@ -17,6 +17,7 @@ const SocketProvider: React.FC<Props> = ({children}) => {
     const [rooms, setRooms] = useState<string[]>([]);
     const [name, setUser] = useState<string>('');
     const [room, setRoom] = useState<string>('');
+    const [messages, setMessages] = useState<Message[]>([]);
 
     useEffect(() => {
         const listener = (name: string) => {
@@ -58,15 +59,24 @@ const SocketProvider: React.FC<Props> = ({children}) => {
         });
     });
 
+    useEffect(() => {
+        const listener = (message: Message) => {
+            setMessages((prev) => [...prev, message])
+        };
+        socket.on("message", listener);
+        return () => { socket.off('message', listener) }
+    }, [socket]);
+
     return (
         <SocketContext.Provider value={{
             socket,
             rooms,
             username: name,
             roomName: room,
+            messages
         }
         }>
-        {children}
+            {children}
         </SocketContext.Provider>
     )
 }

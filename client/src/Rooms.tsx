@@ -1,6 +1,7 @@
 import classes from "./Rooms.module.css";
 import logoMini from './assets/images/logoMini.png'
 import { useSocket } from "./store/SocketProvider";
+import ChatRoom from "./ChatRoom";
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
@@ -36,18 +37,18 @@ function Rooms() {
                         <h4>Available rooms:</h4>
                         {availableRooms.map((availableRoom, index) => (
                             <button onClick={() => joinRoomHandler(availableRoom)} className={classes['room-btn']} key={index}>
-                            {availableRoom}
-                            <ArrowForwardIosIcon />
-                            </button>  
+                                {availableRoom}
+                                <ArrowForwardIosIcon />
+                            </button>
                         ))}
                     </div>
                 </div>
             </div>
-            <div className={classes['right-container']}>
-                <h3>Select Da ChatRoom Of Your Choise</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem molestias nulla doloremque, quo rerum assumenda veritatis quam quasi. Vel maiores ex dolorum dolor unde corporis quos temporibus aspernatur.</p>
-            </div>
-    </div>
+
+            <ChatRoom />
+
+
+        </div>
     );
 }
 

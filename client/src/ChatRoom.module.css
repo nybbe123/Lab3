@@ -1,0 +1,116 @@
+p {
+    color: white;
+}
+
+
+.right-container {
+    width: 60%;
+    height: 100vh;
+    background-image: url('./assets/images/background.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+    
+    .right-continer-header-circel {
+    width: 1rem;
+    height: 1rem;
+    background-color: green;
+    border-radius: 50%;
+    margin: .3rem;
+     }    
+     
+    .right-container-header {
+    height: 3rem;
+    width: 100%;
+    background-color: #3C1675;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+}
+    
+    
+   .right-continer-chat1 {
+    border-radius: 1rem;
+    width: 15rem;
+    background-color: #8F4BEF;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    align-items: center;
+    
+    }
+    .writer1 {
+    display: flex;
+    margin-left: 1rem;
+    }
+    
+    .right-continer-chat2 {
+    border-radius: 1rem;
+    width: 15rem;
+    background-color: #8F4BEF;
+  
+    
+    }   
+     
+    .right-container-header {
+    height: 3rem;
+    width: 100%;
+    background-color: #3C1675;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+    
+   
+   .right-continer-chat1 {
+    border-radius: 1rem;
+    width: 15rem;
+    background-color: #8F4BEF;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    align-items: center;
+    
+    }
+    .writer1 {
+    display: flex;
+    margin-left: 1rem;
+    }
+    
+    .right-continer-chat2 {
+    border-radius: 1rem;
+    width: 15rem;
+    background-color: #8F4BEF;
+    justify-content: center;
+    display: flex;
+    align-self: flex-end;
+    margin-right: 1rem;
+
+    }
+    
+    .writer2 {
+    display: flex;
+    align-self: flex-end;
+    margin-right: 1rem;
+     }
+    
+    .whoIsWriting {
+    position: absolute;
+    bottom: 5rem;
+    margin-left: 1rem;
+    }
+    
+    .writingField {
+    position: absolute;
+    bottom: 1rem;
+    width: 100%;
+    }
+    
+    
+    
+ 
+    
+    
+    
