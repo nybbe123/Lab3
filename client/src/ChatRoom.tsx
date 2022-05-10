@@ -20,35 +20,28 @@ function ChatRoom() {
         }
     }
 
-
-
-    /*     useEffect(() => {
-            const msgElement = document.getElementById("messages");
-            msgElement!.scrollTo(0, document.body.scrollHeight);
-        }, [messages]); */
-
     return (
         <div className={classes['right-container']}>
             <div className={classes['right-container-header']} >
                 <div className={classes['right-continer-header-circel']} ></div>
                 <p>{roomName}</p>
             </div>
-
-            {messages.map(({ body, from }, index) => {
-                const bubbleClass = from === username ? 'right-continer-chatLeft' : 'right-continer-chatRight';
-                const isSameSenderAsPrevMessage = from === messages[index - 1]?.from;
-                return (
-                    <div>
-                        {!isSameSenderAsPrevMessage && <p id="messages" className={classes['writerLeft']}>{from}</p>}
-                        <div className={classes[bubbleClass]}>
-                            <p>{body}</p>
+            <div>
+                {messages.map(({ body, from }, index) => {
+                    const bubbleClass = from === username ? 'right-continer-chatLeft' : 'right-continer-chatRight';
+                    const isSameSenderAsPrevMessage = from === messages[index - 1]?.from;
+                    return (
+                        <div>
+                            {!isSameSenderAsPrevMessage && <p id="messages" className={classes['writerLeft']}>{from}</p>}
+                            <div className={classes[bubbleClass]}>
+                                <p>{body}</p>
+                            </div>
                         </div>
-                    </div>
-                );
-            })}
-
+                    );
+                })}
+            </div>
             <div className={classes['divFormChat']}>
-                <p className={classes['whoIsTyping']}>{username} skriver..</p>
+                <p className={classes['whoIsTyping']}>{username} is typing..</p>
 
                 <form className={classes['formChatInput']} onSubmit={handleSendMessage}>
                     <input
@@ -59,6 +52,7 @@ function ChatRoom() {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         onKeyDown={() => setIsTyping(true)}
+                        autoComplete="off"
                     />
                     <button type="submit" className={classes['sendBtn']}>  <Send /></button>
                 </form>
