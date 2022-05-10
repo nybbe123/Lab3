@@ -4,11 +4,14 @@ import { ClientToServerEvents, Message, ServerToClientEvents } from "../../../se
 
 // Skapar ett interface för kontxten
 export interface SocketContextType {
-    socket: Socket<ServerToClientEvents, ClientToServerEvents>;
+    // socket: Socket<ServerToClientEvents, ClientToServerEvents>;
     rooms: string[];
     username: string;
     roomName: string;
     messages: Message[];
+    sendMessage: (message: string) => void;
+    joinRoom: (roomName: string) => void;
+    connect: (username: string, room: string) => void;
 };
 
 // Skapar själva kontexten av interfacet SocketContextType

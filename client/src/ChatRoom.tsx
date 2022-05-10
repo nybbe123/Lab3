@@ -1,22 +1,31 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import classes from "./ChatRoom.module.css";
 import { useSocket } from "./store/SocketProvider";
+import { Send } from "@mui/icons-material";
+
 
 function ChatRoom() {
-    const { messages, roomName, username, /* users */ } = useSocket();
+    const { sendMessage, messages, roomName, username, /* users */ } = useSocket();
     const [message, setMessage] = useState("");
+    const [istyping, setIsTyping] = useState(false)
 
-    // Each time a user connects to the server it updates a current users array
-    // And when the disconnect they get removed from the array
-
-    // The array is used to display the nicknames of the people typing, and everyone
-    // But the "main user" is displayed on the left side, whilst they are on the right
-
-    const sendMessage = (e: FormEvent<HTMLFormElement>) => {
+    const handleSendMessage = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // TODO: prata med kontexten och skicka meddelandet.
+        if (message.length) {
+            sendMessage(message);
+            setMessage("");
+            console.log(message)
+        } else {
+            return;
+        }
     }
 
+
+
+    /*     useEffect(() => {
+            const msgElement = document.getElementById("messages");
+            msgElement!.scrollTo(0, document.body.scrollHeight);
+        }, [messages]); */
 
     return (
         <div className={classes['right-container']}>
@@ -26,11 +35,11 @@ function ChatRoom() {
             </div>
 
             {messages.map(({ body, from }, index) => {
-                const bubbleClass = from === username ? 'right-continer-chat1' : 'right-continer-chat2';
+                const bubbleClass = from === username ? 'right-continer-chatLeft' : 'right-continer-chatRight';
                 const isSameSenderAsPrevMessage = from === messages[index - 1]?.from;
                 return (
                     <div>
-                        {!isSameSenderAsPrevMessage && <p className={classes['writer1']}>{from}</p>}
+                        {!isSameSenderAsPrevMessage && <p id="messages" className={classes['writerLeft']}>{from}</p>}
                         <div className={classes[bubbleClass]}>
                             <p>{body}</p>
                         </div>
@@ -38,12 +47,23 @@ function ChatRoom() {
                 );
             })}
 
+            <div className={classes['divFormChat']}>
+                <p className={classes['whoIsTyping']}>{username} skriver..</p>
 
-            <p className={classes['whoIsWriting']}>{username} skriver..</p>
-            <form className={classes['']} onSubmit={sendMessage}>
-                <input className={classes['writingField']} type="text" placeholder="Skriv ett meddelande " value={message} />
-                <button type="submit" className={classes['sendBtn']}>Send</button>
-            </form>
+                <form className={classes['formChatInput']} onSubmit={handleSendMessage}>
+                    <input
+                        id="writingField"
+                        className={classes['writingField']}
+                        type="text"
+                        placeholder="Skriv ett meddelande"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        onKeyDown={() => setIsTyping(true)}
+                    />
+                    <button type="submit" className={classes['sendBtn']}>  <Send /></button>
+                </form>
+
+            </div>
 
 
 

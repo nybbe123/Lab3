@@ -12,6 +12,7 @@ p {
     background-size: cover;
     display: flex;
     flex-direction: column;
+    
 }
     
     .right-continer-header-circel {
@@ -19,7 +20,7 @@ p {
     height: 1rem;
     background-color: green;
     border-radius: 50%;
-    margin: .3rem;
+    margin-left: 3rem;
      }    
      
     .right-container-header {
@@ -31,30 +32,6 @@ p {
     align-items: center;
     color: white;
 }
-    
-    
-   .right-continer-chat1 {
-    border-radius: 1rem;
-    width: 15rem;
-    background-color: #8F4BEF;
-    margin-left: 1rem;
-    margin-top: 0.5rem;
-    align-items: center;
-    
-    }
-    .writer1 {
-    display: flex;
-    margin-left: 1rem;
-    }
-    
-    .right-continer-chat2 {
-    border-radius: 1rem;
-    width: 15rem;
-    background-color: #8F4BEF;
-  
-    
-    }   
-     
     .right-container-header {
     height: 3rem;
     width: 100%;
@@ -65,7 +42,7 @@ p {
 }
     
    
-   .right-continer-chat1 {
+   .right-continer-chatLeft {
     border-radius: 1rem;
     width: 15rem;
     background-color: #8F4BEF;
@@ -74,12 +51,12 @@ p {
     align-items: center;
     
     }
-    .writer1 {
+    .writerLeft {
     display: flex;
     margin-left: 1rem;
     }
     
-    .right-continer-chat2 {
+    .right-continer-chatRight {
     border-radius: 1rem;
     width: 15rem;
     background-color: #8F4BEF;
@@ -89,25 +66,37 @@ p {
     margin-right: 1rem;
 
     }
-    
-    .writer2 {
-    display: flex;
-    align-self: flex-end;
-    margin-right: 1rem;
-     }
-    
+  .divFormChat {
+      position: absolute;
+      bottom: .5rem;
+      width: 60%;
+      
+    }
+
+    .formChatInput {
+        display: flex;
+        align-items: flex-end;
+        width: 80%;
+        padding-left: 2rem;
+    }
+
+    .writingTyping{
+       width: 75%;
+       margin-left: 2rem;
+       margin-right: 1.5rem;
+    }
+
     .whoIsWriting {
-    position: absolute;
-    bottom: 5rem;
-    margin-left: 1rem;
+        padding-left: 2rem;
+    }
+
+    .sendBtn {
+      width: 5rem;
+      height: 3.7rem;
+       
     }
     
-    .writingField {
-    position: absolute;
-    bottom: 1rem;
-    width: 100%;
-    }
-    
+
     
     
  

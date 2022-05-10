@@ -6,13 +6,13 @@ import ChatRoom from "./ChatRoom";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 function Rooms() {
-    const { rooms, socket, roomName, username } = useSocket();
+    const { rooms, joinRoom, roomName, username } = useSocket();
     let availableRooms = rooms.filter((room) => {
         return room !== roomName;
     })
 
     const joinRoomHandler = (roomName: string) => {
-        socket.emit('join', roomName)
+        joinRoom(roomName)
     }
 
     return (

@@ -51,6 +51,8 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
         return () => { socket.off('joined', listener) }
     }, [socket]);
 
+
+    // Invalid username error case
     useEffect(() => {
         socket.on("connect_error", (err) => {
             if (err.message === "Invalid username") {
@@ -59,6 +61,7 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
         });
     });
 
+    // Handle messages
     useEffect(() => {
         const listener = (message: Message) => {
             setMessages((prev) => [...prev, message])
@@ -67,13 +70,33 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
         return () => { socket.off('message', listener) }
     }, [socket]);
 
+
+    const sendMessage = (message: string) => {
+        socket.emit("message", message, room);
+    };
+
+    const joinRoom = (roomName: string) => {
+        socket.emit('join', roomName)
+        setMessages([]);
+    };
+
+    const connect = (username: string, room: string) => {
+        socket.auth = { username };
+        socket.connect();
+        socket.emit("join", room);
+        console.log(username, room)
+    };
+
     return (
         <SocketContext.Provider value={{
-            socket,
+            // socket,
             rooms,
             username: name,
             roomName: room,
-            messages
+            messages,
+            sendMessage,
+            joinRoom,
+            connect
         }
         }>
             {children}
