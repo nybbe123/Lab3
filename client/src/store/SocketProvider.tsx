@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
-import { ClientToServerEvents, ServerToClientEvents } from '../../../server/types';
+import { ClientToServerEvents, Message, ServerToClientEvents } from '../../../server/types';
 import SocketContext from "./SocketContext";
 
 interface Props {
     children: React.ReactNode
-  };
+};
 
 // Skapar en provider för kontexten
-const SocketProvider: React.FC<Props> = ({children}) => {
+const SocketProvider: React.FC<Props> = ({ children }) => {
     const navigate = useNavigate();
     const [socket] = useState<Socket<ServerToClientEvents, ClientToServerEvents>>(io("http://localhost:3001", {
         autoConnect: false
@@ -17,6 +17,7 @@ const SocketProvider: React.FC<Props> = ({children}) => {
     const [rooms, setRooms] = useState<string[]>([]);
     const [name, setUser] = useState<string>('');
     const [room, setRoom] = useState<string>('');
+    const [messages, setMessages] = useState<Message[]>([]);
 
     useEffect(() => {
         const listener = (name: string) => {
@@ -50,6 +51,8 @@ const SocketProvider: React.FC<Props> = ({children}) => {
         return () => { socket.off('joined', listener) }
     }, [socket]);
 
+
+    // Invalid username error case
     useEffect(() => {
         socket.on("connect_error", (err) => {
             if (err.message === "Invalid username") {
@@ -58,15 +61,45 @@ const SocketProvider: React.FC<Props> = ({children}) => {
         });
     });
 
+    // Handle messages
+    useEffect(() => {
+        const listener = (message: Message) => {
+            setMessages((prev) => [...prev, message])
+        };
+        socket.on("message", listener);
+        return () => { socket.off('message', listener) }
+    }, [socket]);
+
+
+    const sendMessage = (message: string) => {
+        socket.emit("message", message, room);
+    };
+
+    const joinRoom = (roomName: string) => {
+        socket.emit('join', roomName)
+        setMessages([]);
+    };
+
+    const connect = (username: string, room: string) => {
+        socket.auth = { username };
+        socket.connect();
+        socket.emit("join", room);
+        console.log(username, room)
+    };
+
     return (
         <SocketContext.Provider value={{
-            socket,
+            // socket,
             rooms,
             username: name,
             roomName: room,
+            messages,
+            sendMessage,
+            joinRoom,
+            connect
         }
         }>
-        {children}
+            {children}
         </SocketContext.Provider>
     )
 }
