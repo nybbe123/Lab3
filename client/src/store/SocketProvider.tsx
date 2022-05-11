@@ -42,18 +42,6 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
         return () => { socket.off('roomList', listener); };
     }, [socket]);
 
-
-    // useEffect(() => {
-    //     const listener = (users: string[]) => {
-    //         console.log(users);
-    //         setUsers(users);
-    //     }
-
-    //     socket.on("userList", listener);
-    //     return () => { socket.off("userList", listener); };
-    // }, [socket]);
-
-
     useEffect(() => {
         const listener = (room: string) => {
             console.log(`Users RoomName: ${room}`);
@@ -75,15 +63,6 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
         socket.on('isTyping', listener);
         // return () => { socket.off('isTyping', listener) };
     }, [socket]);
-
-    // useEffect(() => {
-    //     const listener = (room: string) => {
-    //         console.log(`left room: ${room}`);
-    //     };
-
-    //     socket.on("left", listener);
-    //     return () => { socket.off('left', listener) }
-    // }, [socket]);
 
     // Handle messages
     useEffect(() => {
@@ -107,7 +86,7 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
     const connect = (username: string, room: string) => {
         socket.auth = { username };
         socket.connect();
-        socket.emit("join", room);
+        // socket.emit("join", room);
     };
 
     // Invalid username error case

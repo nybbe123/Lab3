@@ -17,7 +17,7 @@
     position: absolute;
     top: 0;
     margin-top: 5rem;
-    height: 150px;
+    height: 100px;
     width: auto;
 }
 
@@ -78,7 +78,7 @@
     line-height: 1.5;
 }
 
- @media (max-height: 1080px) {
+ @media (max-height: 900px) {
     .logotype {
         position: absolute;
         top: 0;
