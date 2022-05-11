@@ -18,6 +18,7 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
     const [name, setUser] = useState<string>('');
     const [room, setRoom] = useState<string>('');
     const [messages, setMessages] = useState<Message[]>([]);
+    const [isTyping, setIsTyping] = useState<string>("");
 
     useEffect(() => {
         const listener = (name: string) => {
@@ -63,7 +64,17 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
         return () => { socket.off('joined', listener) }
     }, [socket]);
 
+    useEffect(() => {
+        const listener = (name: string, room: string) => {
+            if (name) {
+                setIsTyping(`${name} is typing...`);
+                setTimeout(() => setIsTyping(""), 2000);
+            }
+        }
 
+        socket.on('isTyping', listener);
+        return () => { socket.off('isTyping', listener) };
+    }, [socket]);
 
     // useEffect(() => {
     //     const listener = (room: string) => {
@@ -115,6 +126,7 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
             username: name,
             roomName: room,
             messages,
+            isTyping: isTyping,
             sendMessage,
             joinRoom,
             connect

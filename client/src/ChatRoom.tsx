@@ -5,9 +5,8 @@ import { Send } from "@mui/icons-material";
 
 
 function ChatRoom() {
-    const { sendMessage, messages, roomName, username, /* users */ } = useSocket();
+    const { sendMessage, socket, isTyping, messages, roomName, username, /* users */ } = useSocket();
     const [message, setMessage] = useState("");
-    const [istyping, setIsTyping] = useState(false)
 
 
     const handleSendMessage = (e: FormEvent<HTMLFormElement>) => {
@@ -20,8 +19,6 @@ function ChatRoom() {
             return;
         }
     }
-
-
 
 
     return (
@@ -46,7 +43,7 @@ function ChatRoom() {
                 })}
             </div>
             <div className={classes['divFormChat']}>
-                <p className={classes['whoIsTyping']}>{istyping} is typing..</p>
+                <p className={classes['whoIsTyping']}>{isTyping}</p>
 
                 <form className={classes['formChatInput']} onSubmit={handleSendMessage}>
                     <input
@@ -56,7 +53,7 @@ function ChatRoom() {
                         placeholder="Write a message"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        onKeyDown={() => setIsTyping(true)}
+                        onKeyDown={() => socket.emit('typing', roomName)}
                         autoComplete="off"
                     />
                     <button type="submit" className={classes['sendBtn']}>  <Send /></button>
@@ -68,6 +65,7 @@ function ChatRoom() {
 
 
         </div>
+     
     );
 }
 

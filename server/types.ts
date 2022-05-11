@@ -11,6 +11,7 @@ export interface ServerToClientEvents {
     joined: (room: string) => void;
     _error: (errorMessage: string) => void;
     userList: (users: string[]) => void;
+    isTyping: (username: string, room: string) => void;
     // left: (room: string) => void;
   }
   
@@ -18,6 +19,7 @@ export interface ServerToClientEvents {
   export interface ClientToServerEvents {
     message: (message: string, to: string) => void;
     join: (room: string) => void;
+    typing: (room: string) => void;
     // leave: (room: string) => void;
   }
   

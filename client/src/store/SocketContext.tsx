@@ -9,6 +9,7 @@ export interface SocketContextType {
     username: string;
     roomName: string;
     messages: Message[];
+    isTyping: string;
     sendMessage: (message: string) => void;
     joinRoom: (roomName: string) => void;
     connect: (username: string, room: string) => void;
