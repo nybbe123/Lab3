@@ -9,6 +9,7 @@ function ChatRoom() {
     const [message, setMessage] = useState("");
     const [istyping, setIsTyping] = useState(false)
 
+
     const handleSendMessage = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (message.length) {
@@ -20,6 +21,9 @@ function ChatRoom() {
         }
     }
 
+
+
+
     return (
         <div className={classes['right-container']}>
             <div className={classes['right-container-header']} >
@@ -29,9 +33,10 @@ function ChatRoom() {
             <div>
                 {messages.map(({ body, from }, index) => {
                     const bubbleClass = from === username ? 'right-continer-chatLeft' : 'right-continer-chatRight';
+                    const chatSideClass = from === username ? 'right-chatbox-container' : 'left-chatbox-container';
                     const isSameSenderAsPrevMessage = from === messages[index - 1]?.from;
                     return (
-                        <div>
+                        <div className={classes[chatSideClass]}>
                             {!isSameSenderAsPrevMessage && <p id="messages" className={classes['writerLeft']}>{from}</p>}
                             <div className={classes[bubbleClass]}>
                                 <p>{body}</p>
@@ -41,14 +46,14 @@ function ChatRoom() {
                 })}
             </div>
             <div className={classes['divFormChat']}>
-                <p className={classes['whoIsTyping']}>{username} is typing..</p>
+                <p className={classes['whoIsTyping']}>{istyping} is typing..</p>
 
                 <form className={classes['formChatInput']} onSubmit={handleSendMessage}>
                     <input
                         id="writingField"
                         className={classes['writingField']}
                         type="text"
-                        placeholder="Skriv ett meddelande"
+                        placeholder="Write a message"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         onKeyDown={() => setIsTyping(true)}

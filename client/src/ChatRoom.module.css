@@ -2,7 +2,6 @@ p {
     color: white;
 }
 
-
 .right-container {
     width: 60%;
     height: 100vh;
@@ -14,10 +13,7 @@ p {
     flex-direction: column;
     overflow-y: auto;
     
-    
 
-    
-    
 }
     
     .right-continer-header-circel {
@@ -27,9 +23,7 @@ p {
     border-radius: 50%;
     margin-left: 3rem;
     
-    
-     }    
-     
+}    
  
     .right-container-header {
     height: 3rem;
@@ -44,74 +38,76 @@ p {
     gap: 0.3rem;
 }
 
-    
-   
    .right-continer-chatLeft {
     border-radius: 0.2rem;
     margin: 1rem;
     padding: 0.5rem;
     width: 15rem;
     background-color: #B987FF;
-    float: left;
-    
-    
     }
-    .writerLeft {
-    display: flex;
-    margin-left: 1rem;
-    margin-top: 3.5rem;
+
+    .right-chatbox-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-right: 1rem;
     }
+
+        .left-chatbox-container {
+        width: 100%;
+         display: flex;
+         flex-direction: column;
+         justify-content: flex-end;
+        align-items: flex-end;
+        }
+
+        .writerLeft {
+        display: flex;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        margin-top: 3.5rem;
+        }
     
     .right-continer-chatRight {
-    border-radius: 0.2rem;
-    margin: 1rem;
-    padding: 0.5rem;
-    width: 15rem;
-    margin-top: 0.2rem;
-    background-color: #8F4BEF;
-    float: right;
-    
- 
-  
-    
-
-    }
-  .divFormChat {
-      position: absolute;
-      bottom: .5rem;
-      width: 60%;
-      
-    }
-
-    .formChatInput {
+        border-radius: 0.2rem;
+        margin: 1rem;
+        padding: 0.5rem;
+        width: 15rem;
+        background-color: #8F4BEF;
+        float: right;
         display: flex;
-        align-items: flex-end;
-        width: 100%;
-        padding-left: 2rem;
-    }
+        flex-direction: column;  
+     }
 
-    .writingField{
-       width: 75%;
-       margin-left: 2rem;
-       margin-right: 1.5rem;
-    }
-
-    .whoIsTyping {
-        padding-left: 4rem;
-    }
-
-    .sendBtn {
-      width: 5rem;
-      height: 3.7rem;
-      margin-left: 0.5rem;
-      
-       
-    }
-    
-
-    
-    
- 
-    
-    
-    
+     .divFormChat {
+        position: absolute;
+        bottom: .5rem;
+        width: 60%;
+      }
+  
+      .formChatInput {
+          display: flex;
+          align-items: flex-end;
+          width: 100%;
+          padding-left: 2rem;
+      }
+  
+      .writingField{
+         width: 75%;
+         margin-left: 2rem;
+         margin-right: 1.5rem;
+      }
+  
+      .whoIsTyping {
+          padding-left: 4rem;
+      }
+  
+      .sendBtn {
+        width: 5rem;
+        height: 3.7rem;
+        margin-left: 0.5rem;
+        
+         
+      }
