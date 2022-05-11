@@ -65,7 +65,7 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
     }, [socket]);
 
     useEffect(() => {
-        const listener = (name: string, room: string) => {
+        const listener = (name: string) => {
             if (name) {
                 setIsTyping(`${name} is typing...`);
                 setTimeout(() => setIsTyping(""), 2000);
@@ -73,7 +73,7 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
         }
 
         socket.on('isTyping', listener);
-        return () => { socket.off('isTyping', listener) };
+        // return () => { socket.off('isTyping', listener) };
     }, [socket]);
 
     // useEffect(() => {

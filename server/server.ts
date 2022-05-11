@@ -56,9 +56,11 @@ io.on("connection", (socket) => {
     //     io.emit("roomList", getRooms(io));
     //   });
 
-    socket.on("typing", (room) =>
-    socket.broadcast.to(room).emit("isTyping", socket.data.username, room)
-  );
+    socket.on("typing", (room) => {
+     if(socket.data.username) {
+        socket.broadcast.to(room).emit("isTyping", socket.data.username)
+     }
+    });
   
     socket.on('message', (message, room) => {
         io.to(room).emit('message', {
