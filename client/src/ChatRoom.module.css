@@ -23,7 +23,7 @@
 .right-container-header {
     padding: 1rem;
     position: fixed;
-    width: 59.3%;
+    width: 60%;
     top: 0;
     left: 40%;
     background-color: #3C1675;
@@ -35,7 +35,14 @@
 
 .chat-container {
     margin-top: 4rem;
-    margin-bottom: 8rem;
+    margin-bottom: 7rem;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll; 
+}
+
+.chat-container::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
 }
 
 .right-continer-header-circel {
@@ -98,8 +105,10 @@
 
      .divFormChat {
         position: fixed;
+        display: flex;
+        flex-direction: column;
         bottom: 0;
-        width: 59.3%;
+        width: 60%;
         background-color: #3C1675;
         padding: 1rem 3rem 1rem 3rem;
       }
@@ -112,10 +121,6 @@
   
       .writingField{
           width: 100%;
-      }
-  
-      .whoIsTyping {
-          padding-left: 4rem;
       }
   
       .sendBtn {
