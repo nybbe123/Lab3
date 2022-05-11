@@ -2,6 +2,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import classes from "./ChatRoom.module.css";
 import { useSocket } from "./store/SocketProvider";
 import { Send } from "@mui/icons-material";
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 function ChatRoom() {
@@ -24,6 +25,7 @@ function ChatRoom() {
     return (
         <div className={classes['right-container']}>
             <div className={classes['right-container-header']} >
+                <div className={classes['header-menu']}> <MenuIcon /> </div>
                 <div className={classes['right-continer-header-circel']} ></div>
                 <p>{roomName}</p>
             </div>
@@ -65,7 +67,7 @@ function ChatRoom() {
 
 
         </div>
-     
+
     );
 }
 
