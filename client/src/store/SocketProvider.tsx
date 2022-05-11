@@ -65,23 +65,14 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
 
 
 
-    useEffect(() => {
-        const listener = (room: string) => {
-            console.log(`left room: ${room}`);
-        };
+    // useEffect(() => {
+    //     const listener = (room: string) => {
+    //         console.log(`left room: ${room}`);
+    //     };
 
-        socket.on("left", listener);
-        return () => { socket.off('left', listener) }
-    }, [socket]);
-
-    // Invalid username error case
-    useEffect(() => {
-        socket.on("connect_error", (err) => {
-            if (err.message === "Invalid username") {
-                console.log("Invalid username, please try again.");
-            }
-        });
-    });
+    //     socket.on("left", listener);
+    //     return () => { socket.off('left', listener) }
+    // }, [socket]);
 
     // Handle messages
     useEffect(() => {
@@ -106,12 +97,20 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
         socket.auth = { username };
         socket.connect();
         socket.emit("join", room);
-        console.log(username, room)
     };
+
+    // Invalid username error case
+    useEffect(() => {
+        socket.on("connect_error", (err) => {
+            if (err.message === "Invalid username") {
+                console.log("Invalid username, please try again.");
+            }
+        });
+    });
 
     return (
         <SocketContext.Provider value={{
-            // socket,
+            socket,
             rooms,
             username: name,
             roomName: room,

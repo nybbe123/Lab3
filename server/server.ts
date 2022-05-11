@@ -49,12 +49,12 @@ io.on("connection", (socket) => {
         socket.emit("joined", room);
     })
 
-    socket.on("leave", (room) => {
-        socket.leave(room);
-        console.log("user left the room");
-        socket.emit("left", room);
-        io.emit("roomList", getRooms(io));
-      });
+    // socket.on("leave", (room) => {
+    //     socket.leave(room);
+    //     console.log("user left the room");
+    //     socket.emit("left", room);
+    //     io.emit("roomList", getRooms(io));
+    //   });
   
     socket.on('message', (message, room) => {
         io.to(room).emit('message', {

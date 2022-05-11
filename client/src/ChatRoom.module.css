@@ -3,17 +3,20 @@ p {
 }
 
 .right-container {
-    width: 60%;
+    width: 80%;
     height: 100vh;
-    background-image: url('./assets/images/background.png');
+    background:
+    linear-gradient(
+      rgba(93, 12, 168, 0.5), 
+      rgba(72, 12, 168, 0.5)
+    ),
+    url('./assets/images/background.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    
-
 }
     
     .right-continer-header-circel {
