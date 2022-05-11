@@ -4,15 +4,29 @@ import { useSocket } from "./store/SocketProvider";
 import ChatRoom from "./ChatRoom";
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useState } from "react";
 
 function Rooms() {
-    const { rooms, joinRoom, roomName, username } = useSocket();
+
+    const { rooms, socket, roomName, username } = useSocket();
+    const [room, setRoomName] = useState("");
+
+    const joinRoomHandler = () => {
+        if (!room.length) {
+            console.log("Username & roomname required...");
+            return;
+        }
+        socket.emit('join', room);
+
+    }
+
+    const switchRoomHandler = (room: string) => {
+        socket.emit('leave', roomName);
+        socket.emit('join', room);
+
     let availableRooms = rooms.filter((room) => {
         return room !== roomName;
     })
-
-    const joinRoomHandler = (roomName: string) => {
-        joinRoom(roomName)
     }
 
     return (
@@ -26,15 +40,12 @@ function Rooms() {
                     </div>
                 </div>
                 <div className={classes['room-container']}>
-                    <div className={classes['own-room']}>
-                        <h4>Your Room:</h4>
-                        <button className={classes['room-btn']}>
-                            {roomName}
-                            <ArrowForwardIosIcon />
-                        </button>
-                    </div>
                     <div className={classes['other-rooms']}>
                         <h4>Available rooms:</h4>
+                        {rooms.map((room, index) => (
+                            <button onClick={() => switchRoomHandler(room)} className={classes[room === roomName ?'room-btn-active' : 'room-btn']} key={index}>
+                                {room}
+                            
                         {availableRooms.map((availableRoom, index) => (
                             <button onClick={() => joinRoomHandler(availableRoom)} className={classes['room-btn']} key={index}>
                                 {availableRoom}
@@ -42,13 +53,38 @@ function Rooms() {
                             </button>
                         ))}
                     </div>
+                    <div>
                 </div>
+                    <div className={classes['create-room-main']}>
+                        <h2>Create Room</h2>
+    
+                        <div className={classes['create-rooms']}>
+                            <input
+                                type="text"
+                                name="roomname"
+                                id="roomname"
+                                autoComplete="off"
+                                placeholder="Enter Chatroom Name"
+                                onChange={(event) => {
+                                    setRoomName(event.target.value);
+                                }}
+                            />
+                            <button onClick={() => joinRoomHandler()} className={classes['create-room-btn']}>CREATE</button>
+                            </div>
+                        </div>
+                    </div>
             </div>
-
-            <ChatRoom />
-
-
-        </div>
+            <div className={classes['right-container']}>
+                {roomName ? (
+                   <ChatRoom />
+                ): (
+                    <div>
+                        <h3>Create A Chatroom</h3>
+                        <p>Start a chat! Stay connected with your friends and family! Let's chat and have fun together!</p>
+                    </div>
+                )}
+            </div>
+      </div>
     );
 }
 

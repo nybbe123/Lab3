@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
 import { ClientToServerEvents, Message, ServerToClientEvents } from '../../../server/types';
@@ -30,7 +30,7 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
         return () => { socket.off('connected', listener); };
     }, [navigate, socket]);
 
-    //Listar alla rum
+
     useEffect(() => {
         const listener = (availableRooms: string[]) => {
             console.log(availableRooms);
@@ -40,6 +40,18 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
         socket.on("roomList", listener);
         return () => { socket.off('roomList', listener); };
     }, [socket]);
+
+
+    // useEffect(() => {
+    //     const listener = (users: string[]) => {
+    //         console.log(users);
+    //         setUsers(users);
+    //     }
+
+    //     socket.on("userList", listener);
+    //     return () => { socket.off("userList", listener); };
+    // }, [socket]);
+
 
     useEffect(() => {
         const listener = (room: string) => {
@@ -51,6 +63,16 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
         return () => { socket.off('joined', listener) }
     }, [socket]);
 
+
+
+    useEffect(() => {
+        const listener = (room: string) => {
+            console.log(`left room: ${room}`);
+        };
+
+        socket.on("left", listener);
+        return () => { socket.off('left', listener) }
+    }, [socket]);
 
     // Invalid username error case
     useEffect(() => {
@@ -97,7 +119,7 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
             sendMessage,
             joinRoom,
             connect
-        }
+          }
         }>
             {children}
         </SocketContext.Provider>
