@@ -1,16 +1,15 @@
 import classes from "./Rooms.module.css";
 import logoMini from './assets/images/logoMini.png'
 import { useSocket } from "./store/SocketProvider";
+import ChatRoom from "./ChatRoom";
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useState } from "react";
 
 function Rooms() {
+
     const { rooms, socket, roomName, username } = useSocket();
     const [room, setRoomName] = useState("");
-    // let availableRooms = rooms.filter((room) => {
-    //     return room !== roomName;
-    // })
 
     const joinRoomHandler = () => {
         if (!room.length) {
@@ -24,6 +23,10 @@ function Rooms() {
     const switchRoomHandler = (room: string) => {
         socket.emit('leave', roomName);
         socket.emit('join', room);
+
+    let availableRooms = rooms.filter((room) => {
+        return room !== roomName;
+    })
     }
 
     return (
@@ -42,6 +45,10 @@ function Rooms() {
                         {rooms.map((room, index) => (
                             <button onClick={() => switchRoomHandler(room)} className={classes[room === roomName ?'room-btn-active' : 'room-btn']} key={index}>
                                 {room}
+                            
+                        {availableRooms.map((availableRoom, index) => (
+                            <button onClick={() => joinRoomHandler(availableRoom)} className={classes['room-btn']} key={index}>
+                                {availableRoom}
                                 <ArrowForwardIosIcon />
                             </button>
                         ))}
@@ -69,9 +76,7 @@ function Rooms() {
             </div>
             <div className={classes['right-container']}>
                 {roomName ? (
-                    <div>
-                       <p>Cha cha bloggen, Empaboi här, idag har jag ätit en sallad och knappat på datorn</p>
-                    </div>
+                   <ChatRoom />
                 ): (
                     <div>
                         <h3>Create A Chatroom</h3>
@@ -79,7 +84,7 @@ function Rooms() {
                     </div>
                 )}
             </div>
-    </div>
+      </div>
     );
 }
 

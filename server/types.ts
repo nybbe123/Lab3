@@ -1,3 +1,7 @@
+export interface Message {
+  body: string;
+  from: string;
+}
 
 // All events going from the server to the client and their predefined types
 export interface ServerToClientEvents {
@@ -31,4 +35,3 @@ export interface ServerToClientEvents {
     username: string;
     chatlog: (chatlog: string[]) => void;
   }
-  

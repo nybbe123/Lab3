@@ -4,7 +4,7 @@ import logo from "./assets/images/chathouse.png";
 import { useSocket } from "./store/SocketProvider";
 
 function LoginPage() {
-  const socketCtx = useSocket();
+  const { connect } = useSocket();
   const [name, setUsername] = useState("");
 
   function onHandleClick() {
@@ -12,10 +12,12 @@ function LoginPage() {
       console.log("Username & roomname required...");
       return;
     }
+
     socketCtx.socket!.auth = {
       username: name,
     };
     socketCtx.socket!.connect();
+    connect(name, room);
   }
 
   return (
