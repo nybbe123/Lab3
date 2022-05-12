@@ -1,12 +1,17 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import classes from "./ChatRoom.module.css";
 import { useSocket } from "./store/SocketProvider";
 import { Send } from "@mui/icons-material";
+import MenuIcon from '@mui/icons-material/Menu';
 
+interface Props {
+    onToggleLeftContainer: () => void;
+}
 
-function ChatRoom() {
+function ChatRoom({ onToggleLeftContainer }: Props) {
     const { sendMessage, socket, isTyping, messages, roomName, username, /* users */ } = useSocket();
     const [message, setMessage] = useState("");
+    const scrollContainer = useRef<HTMLDivElement>(null);
 
 
     const handleSendMessage = (e: FormEvent<HTMLFormElement>) => {
@@ -20,10 +25,16 @@ function ChatRoom() {
         }
     }
 
+    useEffect(() => {
+        if (!scrollContainer.current) return;
+        scrollContainer.current.scrollTo({ top: scrollContainer.current.scrollHeight });
+    }, [messages])
+
 
     return (
-        <div className={classes['right-container']}>
+        <div ref={scrollContainer} className={classes['right-container']}>
             <div className={classes['right-container-header']} >
+                <div className={classes['header-menu']} onClick={onToggleLeftContainer} > <MenuIcon /> </div>
                 <div className={classes['right-continer-header-circel']} ></div>
                 <p>{roomName}</p>
             </div>
@@ -65,7 +76,7 @@ function ChatRoom() {
 
 
         </div>
-     
+
     );
 }
 

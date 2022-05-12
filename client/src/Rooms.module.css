@@ -140,6 +140,14 @@
     line-height: 1.5;
 }
 
+.left-container.show-as-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    z-index: 10;
+}
+
+
 @media (max-height: 1080px) {
     .logo-container {
         margin-top: 3rem;
@@ -153,4 +161,10 @@
     .right-container {
         display: none;
     }
+ }
+ @media(max-width : 1080px) {
+   .left-container {
+       display: none;
+   }
+     
  }

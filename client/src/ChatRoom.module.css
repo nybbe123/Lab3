@@ -125,5 +125,43 @@
   
       .sendBtn {
         height: 3.7rem;
-        width: 8rem;
+
+        margin-left: 0.5rem;
       }
+
+      .header-menu {
+          display: none;
+      }
+
+      @media(max-width : 1080px) {
+        .right-container {
+            width: 100%;
+        }
+        .right-container-header {
+            width: 100%;
+        }
+        .FormChat {
+            width: 100%;
+        }
+          .writingField {
+              width: 20rem;
+          }
+
+          .header-menu {
+            display: flex;
+            color: grey;
+            margin-left: 1rem;
+
+            z-index: 100;
+            position: absolute;
+          }
+          
+    }
+
+    @media (max-width:600px ){
+        .right-continer-chatLeft, .right-continer-chatRight {
+
+            width: 9rem;
+
+        }
+    }

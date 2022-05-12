@@ -32,9 +32,9 @@ io.on("connection", (socket) => {
     if (!socket.data.username) return;
 
     console.log("a user connected");
-    if(socket.data.username) {
+    if (socket.data.username) {
         socket.emit("connected", socket.data.username);
-        socket.emit("roomList", getRooms(io)); 
+        socket.emit("roomList", getRooms(io));
         // socket.emit("userList", getUsers(io));
     }
 
@@ -61,7 +61,7 @@ io.on("connection", (socket) => {
         socket.broadcast.to(room).emit("isTyping", socket.data.username)
      }
     });
-  
+
     socket.on('message', (message, room) => {
         io.to(room).emit('message', {
             body: message,
