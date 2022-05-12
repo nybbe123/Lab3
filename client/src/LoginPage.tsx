@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classes from "./LoginPage.module.css";
 import logo from "./assets/images/chathouse.png";
+import logo1 from "./assets/images/logoSmiley.png";
 import { useSocket } from "./store/SocketProvider";
 
 function LoginPage() {
@@ -23,11 +24,11 @@ function LoginPage() {
   return (
     <div className={classes["main-container"]}>
       <div className={classes["left-container"]}>
-        <img src={logo} alt="logotype" className={classes.logotype} />
+        <img src={logo1} alt="logotype" className={classes.logotype} />
         <div className={classes["login-container"]}>
           <h3>Create New Chat</h3>
           <div className={classes["username-container"]}>
-            <label htmlFor="username">Nickname</label>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
               name="username"

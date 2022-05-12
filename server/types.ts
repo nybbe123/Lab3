@@ -11,7 +11,7 @@ export interface ServerToClientEvents {
     joined: (room: string) => void;
     _error: (errorMessage: string) => void;
     userList: (users: string[]) => void;
-    isTyping: (username: string, room: string) => void;
+    isTyping: (username: string) => void;
     // left: (room: string) => void;
   }
   
