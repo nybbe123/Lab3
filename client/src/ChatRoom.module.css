@@ -133,8 +133,11 @@ p {
 
           .header-menu {
             display: flex;
-            color: white;
+            color: black; /* TODO..... */
             margin-left: 1rem;
+
+            z-index: 100;
+            position: absolute;
           }
           
     }
