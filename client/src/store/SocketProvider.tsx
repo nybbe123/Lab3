@@ -61,7 +61,16 @@ const SocketProvider: React.FC<Props> = ({ children }) => {
         }
 
         socket.on('isTyping', listener);
-        // return () => { socket.off('isTyping', listener) };
+        return () => { socket.off('isTyping', listener) };
+    }, [socket]);
+
+    useEffect(() => {
+        const listener = (room: string) => {
+            console.log(`left room: ${room}`);
+        };
+
+        socket.on("left", listener);
+        return () => { socket.off('left', listener) }
     }, [socket]);
 
     // Handle messages

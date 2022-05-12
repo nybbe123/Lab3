@@ -12,7 +12,7 @@ export interface ServerToClientEvents {
     _error: (errorMessage: string) => void;
     userList: (users: string[]) => void;
     isTyping: (username: string) => void;
-    // left: (room: string) => void;
+    left: (room: string) => void;
   }
   
   // All events going from the client to the server and their predefined types
@@ -20,7 +20,7 @@ export interface ServerToClientEvents {
     message: (message: string, to: string) => void;
     join: (room: string) => void;
     typing: (room: string) => void;
-    // leave: (room: string) => void;
+    leave: (room: string) => void;
   }
   
   // All internal server events and their predifned types
