@@ -147,6 +147,7 @@
     z-index: 10;
 }
 
+
 @media (max-height: 1080px) {
     .logo-container {
         margin-top: 3rem;
