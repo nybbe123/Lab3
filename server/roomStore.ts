@@ -12,13 +12,13 @@ export function getRooms(io: Server) {
     return rooms;
 }
 
-export function getUsers(io: Server) {
-    const users = [];
-    for(let [id, socket] of io.sockets.sockets) {
-        users.push({
-            id: id,
-            name: socket.data.nickname,
-        });
-    }
-    return users;
-}
+// export function getUsers(io: Server) {
+//     const users = [];
+//     for(let [id, socket] of io.sockets.sockets) {
+//         users.push({
+//             id: id,
+//             name: socket.data.nickname,
+//         });
+//     }
+//     return users;
+// }
