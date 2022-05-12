@@ -3,7 +3,7 @@ import http from "http"; //Req to build server with socket.io
 import cors from "cors"; //Req for secure cross-origin requests and data transfers between browsers and servers.
 import { Server, Socket } from "socket.io";
 import { ClientToServerEvents, ServerToClientEvents, InterServerEvents, ServerSocketData } from "./types";
-import { getRooms, getUsers } from "./roomStore";
+import { getRooms } from "./roomStore";
 
 const app = express();
 app.use(cors());
@@ -49,16 +49,18 @@ io.on("connection", (socket) => {
         socket.emit("joined", room);
     })
 
-    // socket.on("leave", (room) => {
-    //     socket.leave(room);
-    //     console.log("user left the room");
-    //     socket.emit("left", room);
-    //     io.emit("roomList", getRooms(io));
-    //   });
+    socket.on("leave", (room) => {
+        socket.leave(room);
+        console.log("user left the room", room);
+        socket.emit("left", room);
+        io.emit("roomList", getRooms(io));
+      });
 
-    //     socket.on("typing", (room) =>
-    //     socket.broadcast.to(room).emit("isTyping", socket.data.username, room)
-    //   );
+    socket.on("typing", (room) => {
+     if(socket.data.username) {
+        socket.broadcast.to(room).emit("isTyping", socket.data.username)
+     }
+    });
 
     socket.on('message', (message, room) => {
         io.to(room).emit('message', {
