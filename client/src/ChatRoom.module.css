@@ -90,24 +90,18 @@
      }
 
      .divFormChat {
-
         position: fixed;
-        
         display: flex;
-        
         flex-direction: column;
-        
         bottom: 0;
-        
-        width: 60%;
-        
+        width: 62%;
         background-color: #3C1675;
-        
         padding: 1rem 3rem 1rem 3rem;
+    }
         
-        }
-  
-      .formChatInput {
+        
+        
+     .formChatInput {
           display: flex;
           align-items: flex-end;
           width: 100%;
@@ -155,6 +149,9 @@
 
             z-index: 100;
             position: absolute;
+          }
+          .divFormChat {
+              width: 100%;
           }
           
     }
