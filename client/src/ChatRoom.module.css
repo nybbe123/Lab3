@@ -50,7 +50,7 @@
     border-radius: 0.2rem;
     margin: 1rem;
     padding: 0.5rem;
-    width: 15rem;
+    width: auto;
     background-color: #B987FF;
     }
 
@@ -82,7 +82,7 @@
         border-radius: 0.2rem;
         margin: 1rem;
         padding: 0.5rem;
-        width: 15rem;
+        width: auto;
         background-color: #8F4BEF;
         float: right;
         display: flex;
