@@ -50,7 +50,7 @@
     border-radius: 0.2rem;
     margin: 1rem;
     padding: 0.5rem;
-    width: 15rem;
+    width: auto;
     background-color: #B987FF;
     }
 
@@ -82,7 +82,7 @@
         border-radius: 0.2rem;
         margin: 1rem;
         padding: 0.5rem;
-        width: 15rem;
+        width: auto;
         background-color: #8F4BEF;
         float: right;
         display: flex;
@@ -90,24 +90,18 @@
      }
 
      .divFormChat {
-
         position: fixed;
-        
         display: flex;
-        
         flex-direction: column;
-        
         bottom: 0;
-        
-        width: 60%;
-        
+        width: 62%;
         background-color: #3C1675;
-        
         padding: 1rem 3rem 1rem 3rem;
+    }
         
-        }
-  
-      .formChatInput {
+        
+        
+     .formChatInput {
           display: flex;
           align-items: flex-end;
           width: 100%;
@@ -155,6 +149,9 @@
 
             z-index: 100;
             position: absolute;
+          }
+          .divFormChat {
+              width: 100%;
           }
           
     }
