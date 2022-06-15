@@ -19,7 +19,7 @@ function ChatRoom({ onToggleLeftContainer }: Props) {
         if (message.length) {
             sendMessage(message);
             setMessage("");
-            console.log(message)
+            console.log(message);
         } else {
             return;
         }

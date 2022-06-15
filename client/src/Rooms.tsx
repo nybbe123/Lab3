@@ -24,6 +24,7 @@ function Rooms() {
         if (!room.length) {
             return;
         }
+        socket.emit('leave', roomName)
         joinRoom(room);
     }
 
