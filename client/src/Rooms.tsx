@@ -5,12 +5,11 @@ import ChatRoom from "./ChatRoom";
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useState } from "react";
-import { Socket } from "socket.io-client";
 
 function Rooms() {
     const { rooms, joinRoom, roomName, username, socket } = useSocket();
     const [room, setRoom] = useState("");
-     const [showLeftContainer, setShowLeftContainer] = useState(false);
+    const [showLeftContainer, setShowLeftContainer] = useState(false);
 
     const joinRoomHandler = (newRoom: string) => {
         if(roomName) {

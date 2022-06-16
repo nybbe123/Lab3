@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import classes from "./LoginPage.module.css";
-import logo from "./assets/images/chathouse.png";
 import logo1 from "./assets/images/logoSmiley.png";
 import { useSocket } from "./store/SocketProvider";
 
@@ -13,11 +12,6 @@ function LoginPage() {
       console.log("Username & roomname required...");
       return;
     }
-
-    // socketCtx.socket!.auth = {
-    //   username: name,
-    // };
-    // socketCtx.socket!.connect();
     socketCtx.connect(name, socketCtx.roomName);
   }
 
